@@ -1,3 +1,6 @@
+
+import javax.swing.SpinnerNumberModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,13 +11,14 @@
  *
  * @author user
  */
-public class FirstForm extends javax.swing.JFrame {
+public class FirstForm extends javax.swing.JFrame 
+{
 
-    /**
-     * Creates new form FirstForm
-     */
+
     public FirstForm() {
         initComponents();
+        initBoxes();
+        initSpinners();
     }
 
     /**
@@ -25,7 +29,6 @@ public class FirstForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel2 = new javax.swing.JLabel();
         modularButton = new javax.swing.JButton();
@@ -36,33 +39,31 @@ public class FirstForm extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        timeUnidadSpinner = new javax.swing.JComboBox<>();
+        timeUnidadSpinner = new javax.swing.JComboBox<String>();
         desviacionLabel = new javax.swing.JLabel();
         desviacionSpinner = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
-        funcionPortadoraBox = new javax.swing.JComboBox<>();
+        funcionPortadoraBox = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         frecuenciaPortadoraSpinner = new javax.swing.JSpinner();
-        frecuenciaPortadoraUnidad = new javax.swing.JComboBox<>();
+        frecuenciaPortadoraUnidad = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
         fasePortadoraSpinner = new javax.swing.JSpinner();
-        fasePortadoraUnidad = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         amplitudPortadoraSpinner = new javax.swing.JSpinner();
-        amplitudPortadoraUnidad = new javax.swing.JComboBox<>();
+        amplitudPortadoraUnidad = new javax.swing.JComboBox<String>();
         ruidoPortadoraCheck = new javax.swing.JCheckBox();
         portadoraButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        funcionModuladoraBox = new javax.swing.JComboBox<>();
+        funcionModuladoraBox = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
         frecuenciaModuladoraSpinner = new javax.swing.JSpinner();
-        frecuenciaModuladoraUnidad = new javax.swing.JComboBox<>();
+        frecuenciaModuladoraUnidad = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         faseModuladoraSpinner = new javax.swing.JSpinner();
-        faseModuladoraUnidad = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         amplitudModuladoraSpinner = new javax.swing.JSpinner();
-        amplitudModuladoraUnidad = new javax.swing.JComboBox<>();
+        amplitudModuladoraUnidad = new javax.swing.JComboBox<String>();
         ruidoModuladoraCheck = new javax.swing.JCheckBox();
         moduladoraButton = new javax.swing.JButton();
         portadoraPanel = new javax.swing.JPanel();
@@ -95,13 +96,13 @@ public class FirstForm extends javax.swing.JFrame {
 
         jLabel14.setText("Hasta:");
 
-        timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         desviacionLabel.setText("Desviacion");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Señal Portadora", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
-        funcionPortadoraBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        funcionPortadoraBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         funcionPortadoraBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 funcionPortadoraBoxActionPerformed(evt);
@@ -110,15 +111,13 @@ public class FirstForm extends javax.swing.JFrame {
 
         jLabel3.setText("Frecuencia");
 
-        frecuenciaPortadoraUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        frecuenciaPortadoraUnidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel4.setText("Fase");
-
-        fasePortadoraUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel4.setText("Fase (Rad)");
 
         jLabel5.setText("Amplitud");
 
-        amplitudPortadoraUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        amplitudPortadoraUnidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ruidoPortadoraCheck.setText("Ruido");
 
@@ -156,12 +155,11 @@ public class FirstForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(amplitudPortadoraUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(frecuenciaPortadoraUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fasePortadoraUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(frecuenciaPortadoraUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(ruidoPortadoraCheck)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(portadoraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(portadoraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -178,8 +176,7 @@ public class FirstForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(fasePortadoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fasePortadoraUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fasePortadoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -194,19 +191,17 @@ public class FirstForm extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Señal Moduladora", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
-        funcionModuladoraBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        funcionModuladoraBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setText("Frecuencia");
 
-        frecuenciaModuladoraUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        frecuenciaModuladoraUnidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel7.setText("Fase");
-
-        faseModuladoraUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel7.setText("Fase(Rad)");
 
         jLabel8.setText("Amplitud");
 
-        amplitudModuladoraUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        amplitudModuladoraUnidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ruidoModuladoraCheck.setText("Ruido");
 
@@ -228,7 +223,8 @@ public class FirstForm extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(ruidoModuladoraCheck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(moduladoraButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(moduladoraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -240,13 +236,12 @@ public class FirstForm extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addGap(15, 15, 15)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(amplitudModuladoraSpinner)
+                            .addComponent(amplitudModuladoraSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                             .addComponent(faseModuladoraSpinner, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(frecuenciaModuladoraSpinner, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(frecuenciaModuladoraUnidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(faseModuladoraUnidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(amplitudModuladoraUnidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -263,8 +258,7 @@ public class FirstForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(faseModuladoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(faseModuladoraUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(faseModuladoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -283,7 +277,7 @@ public class FirstForm extends javax.swing.JFrame {
         portadoraPanel.setLayout(portadoraPanelLayout);
         portadoraPanelLayout.setHorizontalGroup(
             portadoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGap(0, 272, Short.MAX_VALUE)
         );
         portadoraPanelLayout.setVerticalGroup(
             portadoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +294,7 @@ public class FirstForm extends javax.swing.JFrame {
         );
         moduladoraPanelLayout.setVerticalGroup(
             moduladoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 164, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         moduladaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Grafica Señal Modulada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
@@ -326,26 +320,25 @@ public class FirstForm extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(desviacionLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(modularButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(resetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(4, 4, 4)
+                        .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel14)
+                        .addGap(4, 4, 4)
+                        .addComponent(pHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(tipoModulacionBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(desviacionSpinner, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tipoModulacionBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(modularButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(resetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel13)
-                            .addGap(4, 4, 4)
-                            .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel14)
-                            .addGap(4, 4, 4)
-                            .addComponent(pHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(portadoraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -361,10 +354,10 @@ public class FirstForm extends javax.swing.JFrame {
                     .addComponent(portadoraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(moduladoraPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moduladoraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -418,39 +411,57 @@ public class FirstForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_funcionPortadoraBoxActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FirstForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FirstForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FirstForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FirstForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FirstForm().setVisible(true);
-            }
-        });
+    private void initBoxes()
+    {
+        ComboBoxManager manager = ComboBoxManager.getInstance();
+        manager.initAmplitudBox(this.amplitudModuladoraUnidad);
+        manager.initAmplitudBox(amplitudPortadoraUnidad);
+        manager.initFrequencyBox(frecuenciaModuladoraUnidad);
+        manager.initFrequencyBox(frecuenciaPortadoraUnidad);
+        manager.initModulationTypeBox(tipoModulacionBox);
+        manager.initTimeBox(timeUnidadSpinner);
+        manager.initSignalFunctionBox(funcionModuladoraBox);
+        manager.initSignalFunctionBox(funcionPortadoraBox);
+    }
+
+    private Signal armarPortadora()
+    {
+        double frecuencia = (double) frecuenciaPortadoraSpinner.getValue();
+        double phase = (double) fasePortadoraSpinner.getValue();
+        double amplitud = (double) amplitudPortadoraSpinner.getValue();
+        boolean ruido = ruidoPortadoraCheck.isSelected();
+        String amplitudUnidad = (String)this.amplitudPortadoraUnidad.getSelectedItem();
+        String freqUnidad = (String) this.frecuenciaPortadoraUnidad.getSelectedItem();
+        String tipoFuncion = (String) this.funcionPortadoraBox.getSelectedItem();
+        frecuencia = ConversorDeUnidades.getInstance().convertir(frecuencia,freqUnidad);
+        amplitud = ConversorDeUnidades.getInstance().convertir(amplitud,amplitudUnidad);
+        return new Signal(frecuencia,amplitud,phase,ruido,tipoFuncion);
+    }
+
+    private void initSpinners()
+    {
+        this.desviacionSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.faseModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.fasePortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.amplitudModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.amplitudPortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.frecuenciaPortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.frecuenciaModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+    }
+
+    private Signal armarModuladora()
+    {
+        double frecuencia = (double) frecuenciaModuladoraSpinner.getValue();
+        double phase = (double) faseModuladoraSpinner.getValue();
+        double amplitud = (double) amplitudModuladoraSpinner.getValue();
+        boolean ruido = ruidoModuladoraCheck.isSelected();
+        String amplitudUnidad = (String)this.amplitudModuladoraUnidad.getSelectedItem();
+        String freqUnidad = (String) this.frecuenciaModuladoraUnidad.getSelectedItem();
+        String tipoFuncion = (String) this.funcionModuladoraBox.getSelectedItem();
+        frecuencia = ConversorDeUnidades.getInstance().convertir(frecuencia,freqUnidad);
+        amplitud = ConversorDeUnidades.getInstance().convertir(amplitud,amplitudUnidad);
+        return new Signal(frecuencia,amplitud,phase,ruido,tipoFuncion);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -461,9 +472,7 @@ public class FirstForm extends javax.swing.JFrame {
     private javax.swing.JLabel desviacionLabel;
     private javax.swing.JSpinner desviacionSpinner;
     private javax.swing.JSpinner faseModuladoraSpinner;
-    private javax.swing.JComboBox<String> faseModuladoraUnidad;
     private javax.swing.JSpinner fasePortadoraSpinner;
-    private javax.swing.JComboBox<String> fasePortadoraUnidad;
     private javax.swing.JSpinner frecuenciaModuladoraSpinner;
     private javax.swing.JComboBox<String> frecuenciaModuladoraUnidad;
     private javax.swing.JSpinner frecuenciaPortadoraSpinner;

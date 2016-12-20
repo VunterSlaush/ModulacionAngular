@@ -4,11 +4,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.DefaultXYDataset;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -16,5 +11,23 @@ import org.jfree.data.xy.DefaultXYDataset;
  */
 public class GeneradorDeGraphicas 
 {
+    private static GeneradorDeGraphicas instance;
+    private GeneradorDeGraphicas(){}
 
+    public static GeneradorDeGraphicas getInstance()
+    {
+    	if(instance == null)
+    		instance = new GeneradorDeGraphicas();
+    	return instance;
+    }
+
+    public JFreeChart generarGrafica(Signal signal)
+    {
+
+    }
+
+    public JFreeChart generarGrafica(Signal signal, double from, double to)
+    {
+    	
+    }
 }

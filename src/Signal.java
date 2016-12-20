@@ -27,9 +27,10 @@ public class Signal
    String tipo;
    
 
-    public Signal(double amplitud, double fase, boolean ruido, String tipo) 
+    public Signal(double frecuencia,double amplitud, double fase, boolean ruido, String tipo) 
     {
         this.amplitud = amplitud;
+        this.frecuencia = frecuencia;
         this.fase = fase;
         this.ruido = ruido;
         this.tipo = tipo;
@@ -92,7 +93,7 @@ public class Signal
         value*=amplitud;
         
         if(ruido)
-            value+= Math.random()%RUIDO_MAXIMO;
+            value+= Math.random() % RUIDO_MAXIMO;
         return value;
     }
     
@@ -109,17 +110,13 @@ public class Signal
    {   
        
        double tn;
-
        tn = ceil((n+Math.PI)/(2*Math.PI));
-           //System.out.println(tn);
        return ((n - tn*2*Math.PI) + 2*Math.PI)/Math.PI;
-           //System.out.println(n[1][i]);
-       
    }
    
    private static double triangle(double x)
    {
-      return Math.abs( 1 - x % (2*1) );
+      return Math.abs( 1 - x % 2);
    }
    
    private static double square(double x)
@@ -134,12 +131,12 @@ public class Signal
 
    private static double ceil(double d)
    {
-       long iPart = (long) d;
-       double fPart = d - iPart;
-       if(fPart >= 0.5d)
-           return iPart+1;
-       else 
-           return iPart;
+      long iPart = (long) d;
+      double fPart = d - iPart;
+      if(fPart >= 0.5d)
+          return iPart+1;
+      else 
+          return iPart;
    }
    
    

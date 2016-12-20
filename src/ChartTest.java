@@ -10,7 +10,7 @@ public class ChartTest
    public static void main (String[] args) throws IOException
    {
      
-      MainFrame frame = new MainFrame();
+      FirstForm frame = new FirstForm();
       frame.setVisible(true);
       frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     
