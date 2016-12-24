@@ -16,9 +16,9 @@ public class ConversorDeUnidades
 	private static final double G = Math.pow(10,9);
 
 	//Unidades de Tiempo!
-	private static final double MS = 1/1000;
-	private static final double MIN = 60;
-	private static final double H = 3600;
+	private static final double S = 1000;
+	private static final double MIN = 60*1000;
+	private static final double H = 3600*60*1000;
 
 	public static ConversorDeUnidades getInstance()
 	{
@@ -46,12 +46,11 @@ public class ConversorDeUnidades
     }
 
     public double convertirTiempo(int valor, String unidad)
-    {
-    	if ("ms".equals(unidad))
-    		return valor * MS;
+    {   
+    	if ("s".equals(unidad))
+    		return valor * S;
     	if("min".equals(unidad))
     		return valor * MIN;
-    	
     	
     	return valor;
     }

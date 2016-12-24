@@ -1,5 +1,8 @@
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.SpinnerNumberModel;
+import org.jfree.chart.ChartPanel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +22,9 @@ public class FirstForm extends javax.swing.JFrame
         initComponents();
         initBoxes();
         initSpinners();
+        initCharts();
+        initPanels();
+        resetButtonActionPerformed(null);
     }
 
     /**
@@ -392,21 +398,37 @@ public class FirstForm extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void modularButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modularButtonActionPerformed
-        // TODO add your handling code here:
+        ModulateSignal modulada = armarModuladada();
+        System.out.println(modulada);
+        generarGraficaModuladoda(modulada);
+        
     }//GEN-LAST:event_modularButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
-        // TODO add your handling code here:
+        resetPortadora();
+        resetModuladora();
+        resetModulada();
     }//GEN-LAST:event_resetButtonActionPerformed
 
-    private void portadoraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portadoraButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_portadoraButtonActionPerformed
+    private void portadoraButtonActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+        Signal portadora = armarPortadora();
+        System.out.println(portadora);
+        mostrarGrafica(portadora,portadoraChart);
+    }
 
     private void moduladoraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduladoraButtonActionPerformed
-        // TODO add your handling code here:
+        Signal moduladora = armarModuladora();
+        System.out.println(moduladora);
+        mostrarGrafica(moduladora,moduladoraChart);
     }//GEN-LAST:event_moduladoraButtonActionPerformed
 
+    private void mostrarGrafica(Signal p, ChartPanel chart)
+    {
+        GeneradorDeGraphicas instance = GeneradorDeGraphicas.getInstance();
+        chart.setChart(instance.drawSignal(p));
+    }
+    
     private void funcionPortadoraBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionPortadoraBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_funcionPortadoraBoxActionPerformed
@@ -438,6 +460,22 @@ public class FirstForm extends javax.swing.JFrame
         amplitud = ConversorDeUnidades.getInstance().convertir(amplitud,amplitudUnidad);
         return new Signal(frecuencia,amplitud,phase,ruido,tipoFuncion);
     }
+    
+    private void initPanels()
+    {
+        GridLayout gL = new GridLayout();
+        gL.setColumns(1);
+        gL.setRows(1);
+        portadoraPanel.setLayout(gL);
+        portadoraPanel.setPreferredSize(new Dimension(60,60));
+        moduladoraPanel.setLayout(gL);
+        moduladoraPanel.setPreferredSize(new Dimension(60,60));
+        moduladaPanel.setLayout(gL);
+        moduladaPanel.setPreferredSize(new Dimension(60,200));
+        portadoraPanel.add(portadoraChart);
+        moduladoraPanel.add(moduladoraChart);
+        moduladaPanel.add(moduladaChart);
+    }
 
     private void initSpinners()
     {
@@ -463,7 +501,10 @@ public class FirstForm extends javax.swing.JFrame
         amplitud = ConversorDeUnidades.getInstance().convertir(amplitud,amplitudUnidad);
         return new Signal(frecuencia,amplitud,phase,ruido,tipoFuncion);
     }
-
+    
+    private ChartPanel moduladoraChart;
+    private ChartPanel portadoraChart;
+    private ChartPanel moduladaChart;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner amplitudModuladoraSpinner;
     private javax.swing.JComboBox<String> amplitudModuladoraUnidad;
@@ -505,4 +546,64 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JComboBox<String> timeUnidadSpinner;
     private javax.swing.JComboBox tipoModulacionBox;
     // End of variables declaration//GEN-END:variables
+
+    private void initCharts() 
+    {
+        moduladoraChart = new ChartPanel(null);
+        portadoraChart = new ChartPanel(null);
+        moduladaChart = new ChartPanel(null);
+    }
+
+    private void resetPortadora() 
+    {
+        portadoraChart.setChart(null);
+        fasePortadoraSpinner.setValue(0.0);
+        frecuenciaPortadoraSpinner.setValue(0.0);
+        frecuenciaPortadoraUnidad.setSelectedIndex(3);
+        amplitudPortadoraSpinner.setValue(0.0);
+        amplitudPortadoraUnidad.setSelectedIndex(3);
+        ruidoPortadoraCheck.setSelected(false);
+        funcionPortadoraBox.setSelectedIndex(0);
+    }
+
+    private void resetModuladora() 
+    {
+        moduladoraChart.setChart(null);
+        faseModuladoraSpinner.setValue(0.0);
+        frecuenciaModuladoraSpinner.setValue(0.0);
+        frecuenciaModuladoraUnidad.setSelectedIndex(3);
+        amplitudModuladoraSpinner.setValue(0.0);
+        amplitudModuladoraUnidad.setSelectedIndex(3);
+        ruidoModuladoraCheck.setSelected(false);
+        funcionModuladoraBox.setSelectedIndex(0);
+    }
+
+    private void resetModulada() 
+    {
+        moduladaChart.setChart(null);
+        this.desviacionSpinner.setValue(0.0);
+        this.pHSpinner.setValue(0);
+        this.pDSpinner.setValue(0);
+        this.tipoModulacionBox.setSelectedIndex(0);
+        this.timeUnidadSpinner.setSelectedIndex(3);
+    }
+
+    private ModulateSignal armarModuladada() 
+    {
+        double k = (double)this.desviacionSpinner.getValue();
+        int type = tipoModulacionBox.getSelectedIndex();
+        return new ModulateSignal(armarPortadora(),armarModuladora(),k,type);
+    }
+
+    private void generarGraficaModuladoda(ModulateSignal modulada) 
+    {
+        int desde = (int)pDSpinner.getValue();
+        int hasta = (int)pHSpinner.getValue();
+        String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
+        System.out.println("D: "+desde+ " H:"+hasta);
+        desde = (int)ConversorDeUnidades.getInstance().convertirTiempo(desde, unidadTiempo);
+        hasta = (int)ConversorDeUnidades.getInstance().convertirTiempo(hasta, unidadTiempo);
+        System.out.println("D: "+desde+ " H:"+hasta);
+        moduladaChart.setChart(GeneradorDeGraphicas.getInstance().drawSignal(modulada, desde, hasta, 1000));
+    }
 }

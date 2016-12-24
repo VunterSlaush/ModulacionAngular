@@ -9,7 +9,7 @@
  * @author Jmota 
  * 
  */
-public class Signal 
+public class Signal implements IEvaluableEnTiempo
 {
    static public String SAWTOOTH = "Diente sierra";
    static public String TRIANGULAR = "Triangular";
@@ -17,8 +17,8 @@ public class Signal
    static public String SIN = "Senoidal";
    static public String COS = "Cosenoidal"; 
    
-   private static double pi2 = Math.PI*2;
-   private static double RUIDO_MAXIMO = 0.5;
+   public static double pi2 = Math.PI*2;
+   private static double RUIDO_MAXIMO = 2;
    
    double amplitud; 
    double frecuencia;
@@ -64,6 +64,11 @@ public class Signal
         return ruido;
     }
 
+    @Override
+    public String toString() {
+        return "Signal{" + "amplitud=" + amplitud + ", frecuencia=" + frecuencia + ", fase=" + fase + ", ruido=" + ruido + ", tipo=" + tipo + '}';
+    }
+
     public void setRuido(boolean ruido) {
         this.ruido = ruido;
     }
@@ -76,7 +81,7 @@ public class Signal
         this.tipo = tipo;
     }
     
-    public double evaluar(double t)
+    public double evaluate(double t)
     {
         double value = 0;
         if(tipo.equals(SAWTOOTH))
@@ -94,6 +99,7 @@ public class Signal
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
+        
         return value;
     }
     
@@ -116,7 +122,7 @@ public class Signal
    
    private static double triangle(double x)
    {
-      return Math.abs( 1 - x % 2);
+      return  1 - Math.abs( 1 - x % 2);
    }
    
    private static double square(double x)
