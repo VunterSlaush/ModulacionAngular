@@ -1,6 +1,8 @@
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.SpinnerNumberModel;
 import org.jfree.chart.ChartPanel;
 
@@ -104,7 +106,7 @@ public class FirstForm extends javax.swing.JFrame
 
         timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        desviacionLabel.setText("Desviacion");
+        desviacionLabel.setText("Sensibilidad a la Desviacion (Rad/volt)");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Señal Portadora", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -341,10 +343,9 @@ public class FirstForm extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(tipoModulacionBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(desviacionSpinner, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                    .addComponent(tipoModulacionBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(desviacionSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(portadoraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -442,6 +443,13 @@ public class FirstForm extends javax.swing.JFrame
         manager.initFrequencyBox(frecuenciaModuladoraUnidad);
         manager.initFrequencyBox(frecuenciaPortadoraUnidad);
         manager.initModulationTypeBox(tipoModulacionBox);
+        tipoModulacionBox.addActionListener((ActionEvent e) -> 
+        {
+            if(tipoModulacionBox.getSelectedIndex() == 0)
+                desviacionLabel.setText("Sensibilidad a la Desviacion (Khz/volt)");
+            else
+                desviacionLabel.setText("Sensibilidad a la Desviacion (Adimensional)");
+        });
         manager.initTimeBox(timeUnidadSpinner);
         manager.initSignalFunctionBox(funcionModuladoraBox);
         manager.initSignalFunctionBox(funcionPortadoraBox);
@@ -585,7 +593,7 @@ public class FirstForm extends javax.swing.JFrame
         this.pHSpinner.setValue(0);
         this.pDSpinner.setValue(0);
         this.tipoModulacionBox.setSelectedIndex(0);
-        this.timeUnidadSpinner.setSelectedIndex(3);
+        this.timeUnidadSpinner.setSelectedIndex(1);
     }
 
     private ModulateSignal armarModuladada() 

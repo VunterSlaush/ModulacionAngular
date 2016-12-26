@@ -42,13 +42,10 @@ public class ComboBoxManager
     	String [] unidades = {"GV","MV","KV","V","mV","µV"};
     	initBox(fBox,unidades); 
     }
-    /**
-     * 
-     * TODO Evaluar estas unidades de tiempo!
-     */
+
     public void initTimeBox(JComboBox fBox)
     {
-    	String [] unidades = {"h","min","s","ms"};
+    	String [] unidades = {"s","ms"};
     	initBox(fBox,unidades); 
     }
 
