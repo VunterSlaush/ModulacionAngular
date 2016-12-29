@@ -110,11 +110,11 @@ public class Signal implements IEvaluableEnTiempo
     
     public double evaluarIntegrado(double t)
     {   
-        double value = t*frecuencia*pi2;
+        double value = (double) t*frecuencia*pi2;
         if(tipo.equals(SIN))
-                return Math.cos(Math.toRadians(value));
+                value = Math.cos(Math.toRadians(value));
         if(tipo.equals(COS))
-                return Math.sin(Math.toRadians(value));
+                value = Math.sin(Math.toRadians(value));
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;

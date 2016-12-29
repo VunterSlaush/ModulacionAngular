@@ -30,7 +30,6 @@ public class GeneradorDeGraphicas
     public JFreeChart drawSignal(IEvaluableEnTiempo  s, int from, int to,int unidad)
     {
     	int frames = to - from;
-        System.out.println("from:"+from+" to:"+to+" frames:"+frames);
     	double [][] matrix = new double[AXIS][frames];     
         DefaultXYDataset dataset = new DefaultXYDataset();
 	fillMatrix(matrix,to,from,unidad);

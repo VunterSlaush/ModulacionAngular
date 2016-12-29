@@ -183,7 +183,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="desviacionLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sensibilidad a la Desviacion (Rad/volt)"/>
+        <Property name="text" type="java.lang.String" value="Indice de Modulacion {m}(Adimensional)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="desviacionSpinner">

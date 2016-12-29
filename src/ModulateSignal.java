@@ -16,15 +16,15 @@ public class ModulateSignal implements IEvaluableEnTiempo
     private final Signal portadora;
     private final Signal moduladora;
     private final int modulationType;
-    private final double m;
+    private final double m; // Indice De Modulacion
     private final double B;// B es Ancho de banda!
-    public ModulateSignal(Signal p, Signal mod, double k, int type)
+    public ModulateSignal(Signal p, Signal mod, double m, int type)
     {   
         portadora = p;
         moduladora = mod;
-        this.k = generarSensibilidad(k);
+        this.m = m;
+        this.k = generarSensibilidad();
         modulationType = type;
-        this.m = generarIndiceModulacion();
         B = generarAnchoDeBanda();
     }
     
@@ -41,7 +41,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
 
     private double evaluarFM(double t) 
     {
-       double moduladoraResultado = m*moduladora.evaluarIntegrado(t);
+       double moduladoraResultado = (double) m * moduladora.evaluarIntegrado(t);
        double fase = portadora.fase;
        portadora.fase = moduladoraResultado;
        double value = portadora.evaluate(t);
@@ -50,14 +50,24 @@ public class ModulateSignal implements IEvaluableEnTiempo
     }
 
     private double evualarPM(double t) {
-       double moduladoraResultado = k*moduladora.evaluate(t);
+       double moduladoraResultado = (double)m*moduladora.evaluate(t);
        double fase = portadora.fase;
        portadora.fase = moduladoraResultado;
        double value = portadora.evaluate(t);
        portadora.fase = fase;
        return value;
     }
-
+    
+    public DemodulateSignal demodulada()
+    {
+        return new DemodulateSignal(this);
+    }
+    
+    public double evaluateDemodulate(double t)
+    {
+        return (double) evaluate(t)/moduladora.evaluate(t);
+    }
+    
     @Override
     public String toString() {
         return "ModulateSignal{" + "k=" + k + ", portadora=" + portadora + ", moduladora=" + moduladora + ", modulationType=" + modulationType + ", m=" + m + ", B=" + B + '}';
@@ -74,22 +84,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
             return "Modulacion PM: "+portadora.getTipo()+" VS "+moduladora.getTipo();
     }
 
-    private double calcularIndiceModulacion() 
-    {   
-        //Este Valor puede cambiar dependiendo del tipo de unidad de K! 
-        if(modulationType == FM)
-            return (k*moduladora.amplitud)/(moduladora.frecuencia);
-        else
-            return k*moduladora.amplitud;
-    }
 
-    private double generarIndiceModulacion() 
-    {
-        if(modulationType == FM)//Este valor puede cambiar dependiendo del tipo de unidad de K!
-            return (moduladora.amplitud * k) /(moduladora.frecuencia);
-        else
-            return (moduladora.amplitud * k);
-    }
     
     private double generarAnchoDeBanda()
     {
@@ -122,15 +117,18 @@ public class ModulateSignal implements IEvaluableEnTiempo
         return (double)2*b*moduladora.frecuencia;//Hz!
     }
 
-    private double generarSensibilidad(double k) {
+    private double generarSensibilidad() 
+    {
         if(modulationType == FM)
-            return k * 1000;//Convertimos a KHZ!
+            return (double)(m*Signal.pi2*moduladora.frecuencia)/moduladora.amplitud ;
         else
-            return k;
+            return (double) m/moduladora.amplitud;
     }
 
     private double generarAnchoDeBandaPM() {
        return (double) 2*m*moduladora.frecuencia + 2*moduladora.frecuencia;
     }
+    
+    
     
 }

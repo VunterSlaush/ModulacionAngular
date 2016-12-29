@@ -106,7 +106,7 @@ public class FirstForm extends javax.swing.JFrame
 
         timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        desviacionLabel.setText("Sensibilidad a la Desviacion (Rad/volt)");
+        desviacionLabel.setText("Indice de Modulacion {m}(Adimensional)");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Señal Portadora", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -402,6 +402,8 @@ public class FirstForm extends javax.swing.JFrame
         ModulateSignal modulada = armarModuladada();
         System.out.println(modulada);
         generarGraficaModuladoda(modulada);
+        ResultScreen result = new ResultScreen(modulada);
+        result.setVisible(true);
         
     }//GEN-LAST:event_modularButtonActionPerformed
 
@@ -443,13 +445,6 @@ public class FirstForm extends javax.swing.JFrame
         manager.initFrequencyBox(frecuenciaModuladoraUnidad);
         manager.initFrequencyBox(frecuenciaPortadoraUnidad);
         manager.initModulationTypeBox(tipoModulacionBox);
-        tipoModulacionBox.addActionListener((ActionEvent e) -> 
-        {
-            if(tipoModulacionBox.getSelectedIndex() == 0)
-                desviacionLabel.setText("Sensibilidad a la Desviacion (Khz/volt)");
-            else
-                desviacionLabel.setText("Sensibilidad a la Desviacion (Adimensional)");
-        });
         manager.initTimeBox(timeUnidadSpinner);
         manager.initSignalFunctionBox(funcionModuladoraBox);
         manager.initSignalFunctionBox(funcionPortadoraBox);
@@ -598,9 +593,9 @@ public class FirstForm extends javax.swing.JFrame
 
     private ModulateSignal armarModuladada() 
     {
-        double k = (double)this.desviacionSpinner.getValue();
+        double m = (double)this.desviacionSpinner.getValue();
         int type = tipoModulacionBox.getSelectedIndex();
-        return new ModulateSignal(armarPortadora(),armarModuladora(),k,type);
+        return new ModulateSignal(armarPortadora(),armarModuladora(),m,type);
     }
 
     private void generarGraficaModuladoda(ModulateSignal modulada) 
@@ -608,10 +603,8 @@ public class FirstForm extends javax.swing.JFrame
         int desde = (int)pDSpinner.getValue();
         int hasta = (int)pHSpinner.getValue();
         String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
-        System.out.println("D: "+desde+ " H:"+hasta);
         desde = (int)ConversorDeUnidades.getInstance().convertirTiempo(desde, unidadTiempo);
         hasta = (int)ConversorDeUnidades.getInstance().convertirTiempo(hasta, unidadTiempo);
-        System.out.println("D: "+desde+ " H:"+hasta);
         moduladaChart.setChart(GeneradorDeGraphicas.getInstance().drawSignal(modulada, desde, hasta, 1000));
     }
 }
