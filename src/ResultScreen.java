@@ -204,6 +204,7 @@ public class ResultScreen extends javax.swing.JFrame {
 
     private void initBoxes() {
         ComboBoxManager.getInstance().initTimeBox(timeUnidadSpinner);
+        timeUnidadSpinner.setSelectedIndex(2);
         
     }
 
@@ -214,16 +215,12 @@ public class ResultScreen extends javax.swing.JFrame {
 
     private void initSpinners() {
         pDSpinner.setModel(new SpinnerNumberModel(0,0 ,10000,1));
-        pHSpinner.setModel(new SpinnerNumberModel(1,0 ,10000,1));
+        pHSpinner.setModel(new SpinnerNumberModel(500,0 ,10000,1));
     }
 
     private void initButtons() {
-        updateButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showGraphics();
-            }
+        updateButton.addActionListener((ActionEvent e) -> {
+            showGraphics();
         });
     }
 
@@ -232,11 +229,10 @@ public class ResultScreen extends javax.swing.JFrame {
         int desde = (int)pDSpinner.getValue();
         int hasta = (int)pHSpinner.getValue();
         String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
-        desde = (int)ConversorDeUnidades.getInstance().convertirTiempo(desde, unidadTiempo);
-        hasta = (int)ConversorDeUnidades.getInstance().convertirTiempo(hasta, unidadTiempo);
-        JFreeChart modulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate,desde,hasta,1000);
+        JFreeChart modulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate,desde,hasta,
+                ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
         moduladaChart.setChart(modulada);
-        JFreeChart demodulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate.demodulada(),desde,hasta,1000);
+        JFreeChart demodulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate.demodulada(),desde,hasta,ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
         demoduladaChart.setChart(demodulada);
     }
 }

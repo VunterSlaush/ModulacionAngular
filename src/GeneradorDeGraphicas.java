@@ -24,7 +24,7 @@ public class GeneradorDeGraphicas
 
     public JFreeChart drawSignal(IEvaluableEnTiempo e)
     {
-        return drawSignal(e,0,1000,1000);
+        return drawSignal(e,0,1000,10000);
     }
     
     public JFreeChart drawSignal(IEvaluableEnTiempo  s, int from, int to,int unidad)

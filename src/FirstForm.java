@@ -603,8 +603,7 @@ public class FirstForm extends javax.swing.JFrame
         int desde = (int)pDSpinner.getValue();
         int hasta = (int)pHSpinner.getValue();
         String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
-        desde = (int)ConversorDeUnidades.getInstance().convertirTiempo(desde, unidadTiempo);
-        hasta = (int)ConversorDeUnidades.getInstance().convertirTiempo(hasta, unidadTiempo);
-        moduladaChart.setChart(GeneradorDeGraphicas.getInstance().drawSignal(modulada, desde, hasta, 1000));
+        moduladaChart.setChart(GeneradorDeGraphicas.getInstance().drawSignal(modulada, desde, hasta,
+                ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo)));
     }
 }

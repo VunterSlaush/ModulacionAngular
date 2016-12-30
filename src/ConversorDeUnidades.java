@@ -51,7 +51,21 @@ public class ConversorDeUnidades
     		return valor * S;
     	if("min".equals(unidad))
     		return valor * MIN;
+        if("µs".equals(unidad))
+                return valor * micro;
     	
     	return valor;
+    }
+
+    int retornarMultiploUnidad(String unidad) {
+        if ("s".equals(unidad))
+    		return 1;
+        if("ms".equals(unidad))
+                return 1000;
+        if("s*10^-4".equals(unidad))
+                return 10000;
+        if("µs".equals(unidad))
+                return 100000;
+        return 1000;
     }
 }

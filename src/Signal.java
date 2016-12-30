@@ -27,6 +27,8 @@ public class Signal implements IEvaluableEnTiempo
    double fase;
    boolean ruido; 
    String tipo;
+   double w;//Frecuencia Angular Portadora
+
    
 
     public Signal(double frecuencia,double amplitud, double fase, boolean ruido, String tipo) 
@@ -36,6 +38,7 @@ public class Signal implements IEvaluableEnTiempo
         this.fase = fase;
         this.ruido = ruido;
         this.tipo = tipo;
+        this.w = frecuencia * pi2;
     }
   
     public double getAmplitud() {
@@ -68,7 +71,7 @@ public class Signal implements IEvaluableEnTiempo
 
     @Override
     public String toString() {
-        return "Signal{" + "amplitud=" + amplitud + ", frecuencia=" + frecuencia + ", fase=" + fase + ", ruido=" + ruido + ", tipo=" + tipo + '}';
+        return "Signal{" + "amplitud=" + amplitud + ", frecuencia=" + frecuencia + ", fase=" + fase + ", ruido=" + ruido + ", tipo=" + tipo + ", w=" + w + '}';
     }
 
     public void setRuido(boolean ruido) {
@@ -87,7 +90,8 @@ public class Signal implements IEvaluableEnTiempo
    @Override
     public double evaluate(double t)
     {
-        double value = t*frecuencia*pi2 + fase;
+        double value = t*w + fase;
+       // System.out.println(t+"*"+w+"+"+fase+"="+value);
         if(tipo.equals(SAWTOOTH))
                 value = sawTooth(value);
         if(tipo.equals(SQUARE))
@@ -95,26 +99,31 @@ public class Signal implements IEvaluableEnTiempo
         if(tipo.equals(TRIANGULAR))
                 value = triangle(value);
         if(tipo.equals(SIN))
-                value = Math.sin(Math.toRadians(value));//TODO ver si quitar o no el 2 
+                value = Math.sin(value);//TODO ver si quitar o no el 2 
         if(tipo.equals(COS))
-                value = Math.cos(Math.toRadians(value)); // TODO ver si quitar o no el 2 
-        
+                value = Math.cos(value); // TODO ver si quitar o no el 2 
+        //System.out.println("after function: "+value);
         value*=amplitud;
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
         
-        return Math.floor(value * CIFRAS_SIGNIFICATIVAS) / CIFRAS_SIGNIFICATIVAS;//Truncamos 
-        //return value;
+        //return Math.floor(value * CIFRAS_SIGNIFICATIVAS) / CIFRAS_SIGNIFICATIVAS;//Truncamos
+        
+        return value;
     }
     
     public double evaluarIntegrado(double t)
     {   
-        double value = (double) t*frecuencia*pi2;
+        double value = (double) t*w + fase;
         if(tipo.equals(SIN))
-                value = Math.cos(Math.toRadians(value));
+                value = Math.cos(value);
         if(tipo.equals(COS))
-                value = Math.sin(Math.toRadians(value));
+                value = Math.sin(value);
+        if(tipo.equals(TRIANGULAR))
+                value = triangleI(value);
+        if(tipo.equals(SAWTOOTH))
+                value = sawToothI(value);
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
@@ -127,14 +136,27 @@ public class Signal implements IEvaluableEnTiempo
        tn = ceil((n+Math.PI)/(2*Math.PI));
        return ((n - tn*2*Math.PI) + 2*Math.PI)/Math.PI;*/
        //System.out.println(fractPart(n));
-       return fractPart((double)n/(4*Math.PI));
+       return fractPart((double)n);
+   }
+   
+   public static double sawToothI(double n)
+   {
+       return n*(n-1);
    }
    
    private static double triangle(double x)
    {
        
-      return (2/Math.PI)*(Math.asin(Math.sin(Math.toRadians(Math.PI*x))));
+      return (Math.asin(Math.sin(Math.PI*x)));
       //return  1 - Math.abs( 1 - x % 2);
+   }
+   
+   private static double triangleI(double x)
+   {
+       if(x > 0.5)
+           return 3 - 4*x;
+       else
+           return 4*x - 1;
    }
    
    private static double square(double x)
