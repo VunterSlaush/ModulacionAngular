@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.SpinnerNumberModel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -222,6 +223,20 @@ public class ResultScreen extends javax.swing.JFrame {
         updateButton.addActionListener((ActionEvent e) -> {
             showGraphics();
         });
+        
+        besselButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                JFrame frame = new JFrame();
+                EspectroForm spectro = new EspectroForm(modulate.getSpectro());
+      
+                frame.add(spectro);
+                frame.setVisible(true);
+            }
+        });
+        
     }
 
     private void showGraphics() 

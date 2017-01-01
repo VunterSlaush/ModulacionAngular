@@ -1,3 +1,6 @@
+
+import java.util.HashMap;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,6 +21,9 @@ public class ModulateSignal implements IEvaluableEnTiempo
     private final int modulationType;
     private final double m; // Indice De Modulacion
     private final double B;// B es Ancho de banda!
+    private HashMap<Integer, Double> frecuenciasLaterales;
+    private int cantidad_frecuencias;
+    
     public ModulateSignal(Signal p, Signal mod, double m, int type)
     {   
         portadora = p;
@@ -26,6 +32,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
         this.k = generarSensibilidad();
         modulationType = type;
         B = generarAnchoDeBanda();
+        ejecutarBessel();
     }
     
     @Override
@@ -67,11 +74,12 @@ public class ModulateSignal implements IEvaluableEnTiempo
     {
         return (double) evaluate(t)/moduladora.evaluate(t);
     }
-    
+
     @Override
     public String toString() {
-        return "ModulateSignal{" + "k=" + k + ", portadora=" + portadora + ", moduladora=" + moduladora + ", modulationType=" + modulationType + ", m=" + m + ", B=" + B + '}';
+        return "ModulateSignal{" + "k=" + k + ", portadora=" + portadora + ", moduladora=" + moduladora + ", modulationType=" + modulationType + ", m=" + m + ", B=" + B + ", frecuenciasLaterales=" + frecuenciasLaterales + ", cantidad_frecuencias=" + cantidad_frecuencias + '}';
     }
+   
 
 
 
@@ -127,6 +135,30 @@ public class ModulateSignal implements IEvaluableEnTiempo
 
     private double generarAnchoDeBandaPM() {
        return (double) 2*m*moduladora.frecuencia + 2*moduladora.frecuencia;
+    }
+
+    private void ejecutarBessel() 
+    {
+       cantidad_frecuencias = 0;
+       double calculo_bessel = 0.0;
+       frecuenciasLaterales = new HashMap<>();
+       do
+       {
+           calculo_bessel = Calculador.getInstance().besselAt(cantidad_frecuencias,m);
+           if(calculo_bessel > 0.01 || calculo_bessel<-0.01)
+           {
+               frecuenciasLaterales.put(cantidad_frecuencias, redondear(calculo_bessel));
+               cantidad_frecuencias++;
+           }
+       }while(calculo_bessel > 0.01 || calculo_bessel<-0.01);
+    }
+
+    HashMap<Integer, Double> getSpectro() {
+        return frecuenciasLaterales;
+    }
+
+    private Double redondear(double a) {
+        return Math.round(a * 100.0) / 100.0;
     }
     
     

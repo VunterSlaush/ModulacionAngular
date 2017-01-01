@@ -1,8 +1,17 @@
 
+import java.util.HashMap;
+import java.util.Map;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.XYBarDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 
 /**
@@ -35,7 +44,7 @@ public class GeneradorDeGraphicas
 	fillMatrix(matrix,to,from,unidad);
         fillMatrix(matrix,s,frames);
     	dataset.addSeries(s.getTipo(), matrix);
-        return ChartFactory.createXYLineChart
+        JFreeChart chart = ChartFactory.createXYLineChart
        (
          "", // The chart title
          "t(seg)", // x axis label
@@ -46,6 +55,7 @@ public class GeneradorDeGraphicas
          false, // Use tooltips
          true // Configure chart to generate URLs?
        );
+        return chart;
     }
 
     private void fillMatrix(double [][] matrix, IEvaluableEnTiempo e,int frames)
@@ -64,6 +74,42 @@ public class GeneradorDeGraphicas
         {
             matrix[0][i]=(double)(to-i)/unidad;
         }
+    }
+    
+    public JFreeChart drawSpectro(HashMap<Integer,Double> spectro)
+    {   
+ 
+        IntervalXYDataset dataset = createBarDataSet(spectro);
+     
+        return ChartFactory.createXYBarChart
+       (
+         "Espectro de Frecuencias", // The chart title
+         "Jn", // x axis label
+         false, // y axis label
+         "V",
+         dataset, // The dataset for the chart
+         PlotOrientation.VERTICAL,
+         true, // Is a legend required?
+         false, // Use tooltips
+         true // Configure chart to generate URLs?
+       );
+    }
+
+    private IntervalXYDataset createBarDataSet(HashMap<Integer, Double> spectro) {
+        
+        XYSeriesCollection collection = new XYSeriesCollection();
+        
+        for (Map.Entry<Integer,Double> map : spectro.entrySet()) 
+        {
+             XYSeries jn = new XYSeries("J"+map.getKey());
+             if(map.getValue() > 0)
+                 jn.add(map.getKey(), map.getValue());
+             else
+                 jn.add(-map.getKey(), -map.getValue());
+             collection.addSeries(jn);
+        }
+
+        return new XYBarDataset(collection,0.1);
     }
 
 }
