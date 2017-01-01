@@ -35,6 +35,7 @@ public class ResultScreen extends javax.swing.JFrame {
         initButtons();
         this.modulate = modulate;
         showGraphics();
+        showResultString();
     }
 
     /**
@@ -60,6 +61,7 @@ public class ResultScreen extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         moduladaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Grafica Señal Modulada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -183,8 +185,6 @@ public class ResultScreen extends javax.swing.JFrame {
     private javax.swing.JButton okButton;
     private javax.swing.JSpinner pDSpinner;
     private javax.swing.JSpinner pHSpinner;
-    private javax.swing.JPanel portadoraPanel1;
-    private javax.swing.JPanel portadoraPanel2;
     private javax.swing.JTextArea resultTextArea;
     private javax.swing.JComboBox<String> timeUnidadSpinner;
     private javax.swing.JButton updateButton;
@@ -229,11 +229,17 @@ public class ResultScreen extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                JFrame frame = new JFrame();
+                
                 EspectroForm spectro = new EspectroForm(modulate.getSpectro());
-      
-                frame.add(spectro);
-                frame.setVisible(true);
+                spectro.setVisible(true);
+            }
+        });
+        
+        okButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
         
@@ -249,5 +255,10 @@ public class ResultScreen extends javax.swing.JFrame {
         moduladaChart.setChart(modulada);
         JFreeChart demodulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate.demodulada(),desde,hasta,ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
         demoduladaChart.setChart(demodulada);
+    }
+
+    private void showResultString() {
+        resultTextArea.setEditable(false);
+        resultTextArea.setText(modulate.toString());
     }
 }

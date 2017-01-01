@@ -1,7 +1,10 @@
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
+import javax.swing.WindowConstants;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.plot.XYPlot;
 
@@ -15,16 +18,24 @@ import org.jfree.chart.plot.XYPlot;
  *
  * @author Slaush
  */
-public class EspectroForm extends javax.swing.JPanel {
+public class EspectroForm extends javax.swing.JFrame {
 
     /**
      * Creates new form EspectroForm
-     * @param spectro
      */
-    public EspectroForm(HashMap<Integer,Double> spectro) {
+    public EspectroForm(HashMap<Integer,Double> espectro) {
         initComponents();
-        initChart(spectro);
+        initChart(espectro);
         initPanel();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        okButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              dispose();
+            }
+        });
+        
     }
 
     /**
@@ -39,7 +50,8 @@ public class EspectroForm extends javax.swing.JPanel {
         spectroPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
 
-        spectroPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Espectro de Frecuencias", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         javax.swing.GroupLayout spectroPanelLayout = new javax.swing.GroupLayout(spectroPanel);
         spectroPanel.setLayout(spectroPanelLayout);
@@ -53,14 +65,9 @@ public class EspectroForm extends javax.swing.JPanel {
         );
 
         okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -68,9 +75,9 @@ public class EspectroForm extends javax.swing.JPanel {
                 .addComponent(spectroPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(145, 145, 145)
                 .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,11 +88,10 @@ public class EspectroForm extends javax.swing.JPanel {
                 .addComponent(okButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_okButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -100,7 +106,7 @@ public class EspectroForm extends javax.swing.JPanel {
         gL.setRows(1);
 
         spectroPanel.setLayout(gL);
-        spectroPanel.setPreferredSize(new Dimension(150,300));
+        spectroPanel.setPreferredSize(new Dimension(150,250));
         spectroPanel.add(spectroChart);
     }
 

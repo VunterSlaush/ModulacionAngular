@@ -1,5 +1,6 @@
 
 import java.util.HashMap;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -76,8 +77,31 @@ public class ModulateSignal implements IEvaluableEnTiempo
     }
 
     @Override
-    public String toString() {
-        return "ModulateSignal{" + "k=" + k + ", portadora=" + portadora + ", moduladora=" + moduladora + ", modulationType=" + modulationType + ", m=" + m + ", B=" + B + ", frecuenciasLaterales=" + frecuenciasLaterales + ", cantidad_frecuencias=" + cantidad_frecuencias + '}';
+    public String toString() 
+    {   
+        
+        String retorno = "Resultados \n"
+                + "Sensibilidad a la Desviacion:" + k+" \n" 
+                //+ "portadora=" + portadora + ", moduladora=" + moduladora + ", "
+                //+ "modulationType=" + modulationType +
+     /*
+                Desviación de frecuencia.  
+Desviación de fase.  
+Desviación instantánea de fase.  
+Desviación Instantánea de frecuencia.   
+Frecuencia instantánea.  
+Fase instantánea.  
+Sensibilidad de desviación*/
+                +"Frecuencia Angular Portadora: "+portadora.w+" \n"
+                +"Frecuencia Angular Moduladora: "+moduladora.w+"\n"
+                +"Indice De Modulacion: " + m + "\n"
+                +"Ancho de banda " + B + " hz \n"
+                +"Cantidad de Conjunto de Frecuencias Laterales Significativas: " + cantidad_frecuencias + '\n'
+                +"Amplitudes de las Frecuencias Laterales:\n" +frecuenciasLateralesToString();
+        
+        if(modulationType == FM)
+            retorno += "Desviación de frecuencia (∆f): "+(k*moduladora.amplitud)+"\n";
+        return retorno;
     }
    
 
@@ -159,6 +183,17 @@ public class ModulateSignal implements IEvaluableEnTiempo
 
     private Double redondear(double a) {
         return Math.round(a * 100.0) / 100.0;
+    }
+
+    private String frecuenciasLateralesToString() 
+    {   
+        StringBuilder string = new StringBuilder();
+         for (Map.Entry<Integer,Double> map : frecuenciasLaterales.entrySet()) 
+        {
+            string.append("J").append(map.getKey()).append(": ").append(map.getValue()).append("V \n");
+             
+        }
+        return string.toString();
     }
     
     

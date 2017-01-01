@@ -79,6 +79,8 @@ public class FirstForm extends javax.swing.JFrame
         moduladaPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(2147483647, 600));
+        setMinimumSize(new java.awt.Dimension(700, 700));
 
         jLabel2.setText("Tipo de Modulacion");
 
@@ -285,7 +287,7 @@ public class FirstForm extends javax.swing.JFrame
         portadoraPanel.setLayout(portadoraPanelLayout);
         portadoraPanelLayout.setHorizontalGroup(
             portadoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 297, Short.MAX_VALUE)
         );
         portadoraPanelLayout.setVerticalGroup(
             portadoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +564,7 @@ public class FirstForm extends javax.swing.JFrame
         portadoraChart.setChart(null);
         fasePortadoraSpinner.setValue(0.0);
         frecuenciaPortadoraSpinner.setValue(0.0);
-        frecuenciaPortadoraUnidad.setSelectedIndex(3);
+        frecuenciaPortadoraUnidad.setSelectedIndex(2);
         amplitudPortadoraSpinner.setValue(0.0);
         amplitudPortadoraUnidad.setSelectedIndex(3);
         ruidoPortadoraCheck.setSelected(false);
@@ -574,7 +576,7 @@ public class FirstForm extends javax.swing.JFrame
         moduladoraChart.setChart(null);
         faseModuladoraSpinner.setValue(0.0);
         frecuenciaModuladoraSpinner.setValue(0.0);
-        frecuenciaModuladoraUnidad.setSelectedIndex(3);
+        frecuenciaModuladoraUnidad.setSelectedIndex(2);
         amplitudModuladoraSpinner.setValue(0.0);
         amplitudModuladoraUnidad.setSelectedIndex(3);
         ruidoModuladoraCheck.setSelected(false);

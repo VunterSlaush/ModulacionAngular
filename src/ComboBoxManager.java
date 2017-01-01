@@ -28,7 +28,7 @@ public class ComboBoxManager
 
     public void initFrequencyBox(JComboBox fBox)
     {
-    	String [] unidades = {"GHz","MHz","KHz","Hz","mHz","µHz"}; 
+    	String [] unidades = {"MHz","KHz","Hz"}; 
     	initBox(fBox,unidades);
     }
 
@@ -45,7 +45,7 @@ public class ComboBoxManager
 
     public void initTimeBox(JComboBox fBox)
     {
-    	String [] unidades = {"s","ms","s*10^-4","µs"};
+    	String [] unidades = {"ms","s*10^-4","µs"};
     	initBox(fBox,unidades); 
     }
 
