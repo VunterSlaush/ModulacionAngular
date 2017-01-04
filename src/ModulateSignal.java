@@ -97,10 +97,10 @@ Sensibilidad de desviación*/
                 +"Indice De Modulacion: " + m + "\n"
                 +"Ancho de banda " + B + " hz \n"
                 +"Cantidad de Conjunto de Frecuencias Laterales Significativas: " + cantidad_frecuencias + '\n'
+                + "Desviación de frecuencia (∆f): "+
+                Calculador.getInstance().redondear(k*moduladora.amplitud)+"\n"
                 +"Amplitudes de las Frecuencias Laterales:\n" +frecuenciasLateralesToString();
-        
-        if(modulationType == FM)
-            retorno += "Desviación de frecuencia (∆f): "+(k*moduladora.amplitud)+"\n";
+
         return retorno;
     }
    
@@ -171,19 +171,31 @@ Sensibilidad de desviación*/
            calculo_bessel = Calculador.getInstance().besselAt(cantidad_frecuencias,m);
            if(calculo_bessel > 0.01 || calculo_bessel<-0.01)
            {
-               frecuenciasLaterales.put(cantidad_frecuencias, redondear(calculo_bessel));
+               frecuenciasLaterales.put(cantidad_frecuencias, Calculador.getInstance().redondear(calculo_bessel* portadora.amplitud));
                cantidad_frecuencias++;
            }
        }while(calculo_bessel > 0.01 || calculo_bessel<-0.01);
     }
 
-    HashMap<Integer, Double> getSpectro() {
-        return frecuenciasLaterales;
+    HashMap<Double, Double> getSpectro() 
+    {   
+        HashMap<Double,Double> spectro = new HashMap<>();
+        for(Map.Entry<Integer,Double> e : frecuenciasLaterales.entrySet())
+        {
+           if(e.getKey() == 0)
+               spectro.put(portadora.frecuencia,e.getValue());
+           else
+           {
+               double derecha = portadora.frecuencia + e.getKey()*moduladora.frecuencia;
+               double izquierda = portadora.frecuencia - e.getKey()*moduladora.frecuencia;
+               spectro.put(izquierda,e.getValue());
+               spectro.put(derecha,e.getValue());
+           }
+        }
+        return spectro;
     }
 
-    private Double redondear(double a) {
-        return Math.round(a * 100.0) / 100.0;
-    }
+
 
     private String frecuenciasLateralesToString() 
     {   

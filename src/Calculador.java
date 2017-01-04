@@ -11,7 +11,6 @@
 public class Calculador 
 {   
     private static Calculador instance;
-    private static final int BESSEL_PRECISION = 10;
     private Calculador(){}
     public static Calculador getInstance()
     {
@@ -20,7 +19,8 @@ public class Calculador
         return instance;
     }
 
-    public double j0(double x) throws ArithmeticException {
+    public double j0(double x) throws ArithmeticException 
+    {
         double ax;
 
         if( (ax=Math.abs(x)) < 8.0 ) {
@@ -142,5 +142,9 @@ public class Calculador
             return 1;
         return a * factorial(--a);
     }
-
+    
+    public Double redondear(double a) 
+    {
+        return Math.round(a * 100.0) / 100.0;
+    }
 }

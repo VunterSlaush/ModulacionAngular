@@ -23,7 +23,7 @@ public class EspectroForm extends javax.swing.JFrame {
     /**
      * Creates new form EspectroForm
      */
-    public EspectroForm(HashMap<Integer,Double> espectro) {
+    public EspectroForm(HashMap<Double,Double> espectro) {
         initComponents();
         initChart(espectro);
         initPanel();
@@ -51,20 +51,27 @@ public class EspectroForm extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 375));
+        setMinimumSize(new java.awt.Dimension(500, 375));
         setResizable(false);
 
         javax.swing.GroupLayout spectroPanelLayout = new javax.swing.GroupLayout(spectroPanel);
         spectroPanel.setLayout(spectroPanelLayout);
         spectroPanelLayout.setHorizontalGroup(
             spectroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         spectroPanelLayout.setVerticalGroup(
             spectroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 290, Short.MAX_VALUE)
         );
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,23 +81,27 @@ public class EspectroForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(spectroPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(198, 198, 198)
                 .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spectroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spectroPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(okButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okButtonActionPerformed
 
 
 
@@ -101,7 +112,7 @@ public class EspectroForm extends javax.swing.JFrame {
     private ChartPanel spectroChart;
 
     private void initPanel() {
-         GridLayout gL = new GridLayout();
+        GridLayout gL = new GridLayout();
         gL.setColumns(1);
         gL.setRows(1);
 
@@ -110,10 +121,10 @@ public class EspectroForm extends javax.swing.JFrame {
         spectroPanel.add(spectroChart);
     }
 
-    private void initChart(HashMap<Integer,Double> spectro) 
+    private void initChart(HashMap<Double,Double> spectro) 
     {
         spectroChart = new ChartPanel(GeneradorDeGraphicas.getInstance().drawSpectro(spectro));
-        removerYAxisLabels();
+        //removerYAxisLabels();
         
     }
 

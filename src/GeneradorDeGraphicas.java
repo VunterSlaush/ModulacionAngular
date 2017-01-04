@@ -76,7 +76,7 @@ public class GeneradorDeGraphicas
         }
     }
     
-    public JFreeChart drawSpectro(HashMap<Integer,Double> spectro)
+    public JFreeChart drawSpectro(HashMap<Double,Double> spectro)
     {   
  
         IntervalXYDataset dataset = createBarDataSet(spectro);
@@ -84,32 +84,29 @@ public class GeneradorDeGraphicas
         return ChartFactory.createXYBarChart
        (
          "Espectro de Frecuencias", // The chart title
-         "Jn", // x axis label
+         "Hz", // x axis label
          false, // y axis label
          "V",
          dataset, // The dataset for the chart
          PlotOrientation.VERTICAL,
-         true, // Is a legend required?
+         false, // Is a legend required?
          false, // Use tooltips
          true // Configure chart to generate URLs?
        );
     }
 
-    private IntervalXYDataset createBarDataSet(HashMap<Integer, Double> spectro) {
+    private IntervalXYDataset createBarDataSet(HashMap<Double, Double> spectro) {
         
         XYSeriesCollection collection = new XYSeriesCollection();
         
-        for (Map.Entry<Integer,Double> map : spectro.entrySet()) 
+        for (Map.Entry<Double,Double> map : spectro.entrySet()) 
         {
-             XYSeries jn = new XYSeries("J"+map.getKey());
-             if(map.getValue() > 0)
-                 jn.add(map.getKey(), map.getValue());
-             else
-                 jn.add(-map.getKey(), -map.getValue());
+             XYSeries jn = new XYSeries(map.getKey()+"Hz");
+                jn.add(Math.abs(map.getKey()), Math.abs(map.getValue()));
              collection.addSeries(jn);
         }
 
-        return new XYBarDataset(collection,0.1);
+        return new XYBarDataset(collection,1);
     }
 
 }
