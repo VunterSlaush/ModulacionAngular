@@ -9,6 +9,7 @@ public class ConversorDeUnidades
 	private ConversorDeUnidades(){}
 
 	//Unidades Estandares SI??
+        private static final double nano = Math.pow(10,-9);
 	private static final double micro = Math.pow(10,-6);
 	private static final double m = Math.pow(10,-3);
 	private static final double K = Math.pow(10,3);//10 a la 3
@@ -62,10 +63,11 @@ public class ConversorDeUnidades
     		return 1;
         if("ms".equals(unidad))
                 return 1000;
-        if("s*10^-4".equals(unidad))
+        if("10^-4s".equals(unidad))
                 return 10000;
         if("µs".equals(unidad))
                 return 100000;
+        
         return 1000;
     }
 }

@@ -21,7 +21,8 @@ public class ModulateSignal implements IEvaluableEnTiempo
     private final Signal moduladora;
     private final int modulationType;
     private final double m; // Indice De Modulacion
-    private final double B;// B es Ancho de banda!
+    private final double B;// B es Ancho de banda CARSON
+    private final double B2;// ancho de banda Bessele!
     private HashMap<Integer, Double> frecuenciasLaterales;
     private int cantidad_frecuencias;
     
@@ -34,6 +35,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
         modulationType = type;
         B = generarAnchoDeBanda();
         ejecutarBessel();
+        B2 = generarAnchoDeBandaBessel();
     }
     
     @Override
@@ -95,7 +97,8 @@ Sensibilidad de desviación*/
                 +"Frecuencia Angular Portadora: "+portadora.w+" \n"
                 +"Frecuencia Angular Moduladora: "+moduladora.w+"\n"
                 +"Indice De Modulacion: " + m + "\n"
-                +"Ancho de banda " + B + " hz \n"
+                +"Ancho de banda calculado meditante Carson:" + B + " hz \n"
+                +"Ancho de banda calculado meditante Bessel:" + B2 + " hz \n"
                 +"Cantidad de Conjunto de Frecuencias Laterales Significativas: " + cantidad_frecuencias + '\n'
                 + "Desviación de frecuencia (∆f): "+
                 Calculador.getInstance().redondear(k*moduladora.amplitud)+"\n"
@@ -206,6 +209,11 @@ Sensibilidad de desviación*/
              
         }
         return string.toString();
+    }
+
+    private double generarAnchoDeBandaBessel() 
+    {
+        return (portadora.frecuencia + cantidad_frecuencias*moduladora.frecuencia) - (portadora.frecuencia - cantidad_frecuencias*moduladora.frecuencia);
     }
     
     

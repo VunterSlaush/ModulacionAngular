@@ -45,7 +45,7 @@ public class ComboBoxManager
 
     public void initTimeBox(JComboBox fBox)
     {
-    	String [] unidades = {"ms","s*10^-4","µs"};
+    	String [] unidades = {"ms","10^-4s","µs"};
     	initBox(fBox,unidades); 
     }
 
