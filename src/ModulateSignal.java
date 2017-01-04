@@ -178,6 +178,7 @@ Sensibilidad de desviación*/
                cantidad_frecuencias++;
            }
        }while(calculo_bessel > 0.01 || calculo_bessel<-0.01);
+       cantidad_frecuencias--;
     }
 
     HashMap<Double, Double> getSpectro() 
@@ -212,7 +213,8 @@ Sensibilidad de desviación*/
     }
 
     private double generarAnchoDeBandaBessel() 
-    {
+    {   
+
         return (portadora.frecuencia + cantidad_frecuencias*moduladora.frecuencia) - (portadora.frecuencia - cantidad_frecuencias*moduladora.frecuencia);
     }
     
