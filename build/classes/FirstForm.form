@@ -40,21 +40,20 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="resetButton" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="pDSpinner" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="pHSpinner" min="-2" pref="63" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="timeUnidadSpinner" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="jPanel3" max="32767" attributes="0"/>
                   <Component id="tipoModulacionBox" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel12" alignment="0" pref="190" max="32767" attributes="0"/>
                   <Component id="desviacionSpinner" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
+                          <Component id="velocidadSlider" alignment="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="framesSlider" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="jLabel13" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -90,23 +89,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="desviacionSpinner" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pDSpinner" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="pHSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="timeUnidadSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="velocidadSlider" min="-2" max="-2" attributes="0"/>
+                          <Component id="framesSlider" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="modularButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="resetButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -153,39 +145,10 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="pHSpinner">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="pDSpinner">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="De:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tiempo del Espectro"/>
+        <Property name="text" type="java.lang.String" value="Velocidad                            "/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel14">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Hasta:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="timeUnidadSpinner">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="desviacionLabel">
       <Properties>
@@ -245,7 +208,7 @@
                                   <Component id="portadoraButton" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -408,7 +371,7 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="amplitudModuladoraSpinner" alignment="1" pref="111" max="32767" attributes="0"/>
+                              <Component id="amplitudModuladoraSpinner" alignment="1" max="32767" attributes="0"/>
                               <Component id="faseModuladoraSpinner" alignment="0" max="32767" attributes="0"/>
                               <Component id="frecuenciaModuladoraSpinner" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -609,5 +572,14 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JSlider" name="velocidadSlider">
+    </Component>
+    <Component class="javax.swing.JSlider" name="framesSlider">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel13">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="frames/seg"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

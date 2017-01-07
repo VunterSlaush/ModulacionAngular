@@ -52,8 +52,8 @@ public class GeneradorDeGraphicas
          dataset, // The dataset for the chart
          PlotOrientation.VERTICAL,
          true, // Is a legend required?
-         false, // Use tooltips
-         true // Configure chart to generate URLs?
+         true, // Use tooltips
+         false // Configure chart to generate URLs?
        );
         return chart;
     }

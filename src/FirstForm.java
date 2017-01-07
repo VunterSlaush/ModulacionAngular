@@ -3,7 +3,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartPanel;
 
 /*
@@ -26,6 +32,7 @@ public class FirstForm extends javax.swing.JFrame
         initSpinners();
         initCharts();
         initPanels();
+        initSliders();
         resetButtonActionPerformed(null);
     }
 
@@ -42,12 +49,7 @@ public class FirstForm extends javax.swing.JFrame
         modularButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         tipoModulacionBox = new javax.swing.JComboBox();
-        pHSpinner = new javax.swing.JSpinner();
-        pDSpinner = new javax.swing.JSpinner();
-        jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        timeUnidadSpinner = new javax.swing.JComboBox<String>();
         desviacionLabel = new javax.swing.JLabel();
         desviacionSpinner = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
@@ -77,6 +79,9 @@ public class FirstForm extends javax.swing.JFrame
         portadoraPanel = new javax.swing.JPanel();
         moduladoraPanel = new javax.swing.JPanel();
         moduladaPanel = new javax.swing.JPanel();
+        velocidadSlider = new javax.swing.JSlider();
+        framesSlider = new javax.swing.JSlider();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(2147483647, 600));
@@ -100,13 +105,7 @@ public class FirstForm extends javax.swing.JFrame
 
         tipoModulacionBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel13.setText("De:");
-
-        jLabel12.setText("Tiempo del Espectro");
-
-        jLabel14.setText("Hasta:");
-
-        timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel12.setText("Velocidad                            ");
 
         desviacionLabel.setText("Indice de Modulacion {m}(Adimensional)");
 
@@ -170,7 +169,7 @@ public class FirstForm extends javax.swing.JFrame
                                 .addComponent(ruidoPortadoraCheck)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(portadoraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -246,7 +245,7 @@ public class FirstForm extends javax.swing.JFrame
                                 .addComponent(jLabel8)
                                 .addGap(15, 15, 15)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(amplitudModuladoraSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                            .addComponent(amplitudModuladoraSpinner)
                             .addComponent(faseModuladoraSpinner, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(frecuenciaModuladoraSpinner, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(10, 10, 10)
@@ -320,6 +319,8 @@ public class FirstForm extends javax.swing.JFrame
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jLabel13.setText("frames/seg");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -334,20 +335,17 @@ public class FirstForm extends javax.swing.JFrame
                         .addComponent(modularButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(resetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(4, 4, 4)
-                        .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel14)
-                        .addGap(4, 4, 4)
-                        .addComponent(pHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tipoModulacionBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(desviacionSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(desviacionSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(velocidadSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(framesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(portadoraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,19 +375,14 @@ public class FirstForm extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(desviacionSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel12)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(pHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14))))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(velocidadSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(framesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(modularButton)
                             .addComponent(resetButton)))
@@ -419,20 +412,15 @@ public class FirstForm extends javax.swing.JFrame
     {
         Signal portadora = armarPortadora();
         System.out.println(portadora);
-        mostrarGrafica(portadora,portadoraChart);
+        portadoraThread = cambiarGrafica(portadora,portadoraChart, portadoraThread);
     }
 
     private void moduladoraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduladoraButtonActionPerformed
         Signal moduladora = armarModuladora();
         System.out.println(moduladora);
-        mostrarGrafica(moduladora,moduladoraChart);
+       moduladoraThread = cambiarGrafica(moduladora,moduladoraChart,moduladoraThread);
     }//GEN-LAST:event_moduladoraButtonActionPerformed
 
-    private void mostrarGrafica(Signal p, ChartPanel chart)
-    {
-        GeneradorDeGraphicas instance = GeneradorDeGraphicas.getInstance();
-        chart.setChart(instance.drawSignal(p));
-    }
     
     private void funcionPortadoraBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionPortadoraBoxActionPerformed
         // TODO add your handling code here:
@@ -447,7 +435,6 @@ public class FirstForm extends javax.swing.JFrame
         manager.initFrequencyBox(frecuenciaModuladoraUnidad);
         manager.initFrequencyBox(frecuenciaPortadoraUnidad);
         manager.initModulationTypeBox(tipoModulacionBox);
-        manager.initTimeBox(timeUnidadSpinner);
         manager.initSignalFunctionBox(funcionModuladoraBox);
         manager.initSignalFunctionBox(funcionPortadoraBox);
     }
@@ -519,6 +506,7 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JSpinner desviacionSpinner;
     private javax.swing.JSpinner faseModuladoraSpinner;
     private javax.swing.JSpinner fasePortadoraSpinner;
+    private javax.swing.JSlider framesSlider;
     private javax.swing.JSpinner frecuenciaModuladoraSpinner;
     private javax.swing.JComboBox<String> frecuenciaModuladoraUnidad;
     private javax.swing.JSpinner frecuenciaPortadoraSpinner;
@@ -527,7 +515,6 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JComboBox<String> funcionPortadoraBox;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -541,22 +528,68 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JButton moduladoraButton;
     private javax.swing.JPanel moduladoraPanel;
     private javax.swing.JButton modularButton;
-    private javax.swing.JSpinner pDSpinner;
-    private javax.swing.JSpinner pHSpinner;
     private javax.swing.JButton portadoraButton;
     private javax.swing.JPanel portadoraPanel;
     private javax.swing.JButton resetButton;
     private javax.swing.JCheckBox ruidoModuladoraCheck;
     private javax.swing.JCheckBox ruidoPortadoraCheck;
-    private javax.swing.JComboBox<String> timeUnidadSpinner;
     private javax.swing.JComboBox tipoModulacionBox;
+    private javax.swing.JSlider velocidadSlider;
     // End of variables declaration//GEN-END:variables
-
+    private ChartThread moduladoraThread;
+    private ChartThread portadoraThread;
+    private ChartThread moduladaThread;
+    
+    
     private void initCharts() 
     {
         moduladoraChart = new ChartPanel(null);
+        moduladoraChart.setToolTipText("Click Para Pausar");
+        moduladoraChart.addChartMouseListener(new ChartMouseListener() {
+
+            @Override
+            public void chartMouseClicked(ChartMouseEvent cme) {
+               if(moduladoraThread != null)
+                   moduladoraThread.switchPause();
+            }
+
+            @Override
+            public void chartMouseMoved(ChartMouseEvent cme) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
         portadoraChart = new ChartPanel(null);
+        portadoraChart.setToolTipText("Click Para Pausar");
+        portadoraChart.addChartMouseListener(new ChartMouseListener() {
+
+            @Override
+            public void chartMouseClicked(ChartMouseEvent cme) {
+               if(portadoraThread != null)
+                   portadoraThread.switchPause();
+            }
+
+            @Override
+            public void chartMouseMoved(ChartMouseEvent cme) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
         moduladaChart = new ChartPanel(null);
+        moduladaChart.setToolTipText("Click Para Pausar");
+        moduladaChart.setDisplayToolTips(true);
+        moduladaChart.addChartMouseListener(new ChartMouseListener() {
+
+            @Override
+            public void chartMouseClicked(ChartMouseEvent cme) {
+               if(moduladaThread != null)
+                   moduladaThread.switchPause();
+            }
+
+            @Override
+            public void chartMouseMoved(ChartMouseEvent cme) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
+            }
+        });
     }
 
     private void resetPortadora() 
@@ -587,10 +620,7 @@ public class FirstForm extends javax.swing.JFrame
     {
         moduladaChart.setChart(null);
         this.desviacionSpinner.setValue(0.0);
-        this.pHSpinner.setValue(0);
-        this.pDSpinner.setValue(0);
         this.tipoModulacionBox.setSelectedIndex(0);
-        this.timeUnidadSpinner.setSelectedIndex(1);
     }
 
     private ModulateSignal armarModuladada() 
@@ -602,10 +632,68 @@ public class FirstForm extends javax.swing.JFrame
 
     private void generarGraficaModuladoda(ModulateSignal modulada) 
     {
-        int desde = (int)pDSpinner.getValue();
-        int hasta = (int)pHSpinner.getValue();
-        String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
-        moduladaChart.setChart(GeneradorDeGraphicas.getInstance().drawSignal(modulada, desde, hasta,
-                ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo)));
+        //int desde = (int)pDSpinner.getValue();
+        //int hasta = (int)pHSpinner.getValue();
+        //String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
+        //moduladaChart.setChart(GeneradorDeGraphicas.getInstance().drawSignal(modulada, desde, hasta,
+          //      ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo)));
+        //moduladaThread = new ChartThread(modulada,moduladaChart);
+        //moduladaThread.start();
+        moduladaThread = cambiarGrafica(modulada,moduladaChart,moduladaThread);
+    }
+
+    private ChartThread cambiarGrafica(IEvaluableEnTiempo s, ChartPanel panel, ChartThread thread) 
+    {
+        
+        if(thread == null)
+        {
+            thread = new ChartThread(s,panel);
+            thread.start();
+        }
+        else
+        {
+            if(!thread.isPause())
+                thread.switchPause();
+            thread.changeEvaluable(s);
+            thread.switchPause();
+        }
+        return thread;
+    }
+
+    private void initSliders() 
+    {   
+        velocidadSlider.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(moduladoraThread != null)
+                   moduladoraThread.changeTime(velocidadSlider.getValue());
+               
+                if(moduladaThread != null)
+                   moduladaThread.changeTime(velocidadSlider.getValue());
+                              
+                if(portadoraThread != null)
+                   portadoraThread.changeTime(velocidadSlider.getValue());
+            }
+        });
+        framesSlider.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+               if(moduladoraThread != null)
+                   moduladoraThread.changeFrames(framesSlider.getValue());
+               
+                if(moduladaThread != null)
+                   moduladaThread.changeFrames(framesSlider.getValue());
+                              
+                if(portadoraThread != null)
+                   portadoraThread.changeFrames(framesSlider.getValue());
+            }
+        });
+        
+        velocidadSlider.setMinimum(150);
+        velocidadSlider.setMaximum(1000);
+        framesSlider.setMaximum(500);
+        framesSlider.setMinimum(200);
     }
 }
