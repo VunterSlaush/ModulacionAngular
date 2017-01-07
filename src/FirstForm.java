@@ -667,13 +667,13 @@ public class FirstForm extends javax.swing.JFrame
             @Override
             public void stateChanged(ChangeEvent e) {
                 if(moduladoraThread != null)
-                   moduladoraThread.changeTime(velocidadSlider.getValue());
+                   moduladoraThread.changeTime(500 - velocidadSlider.getValue());
                
                 if(moduladaThread != null)
-                   moduladaThread.changeTime(velocidadSlider.getValue());
+                   moduladaThread.changeTime(500 - velocidadSlider.getValue());
                               
                 if(portadoraThread != null)
-                   portadoraThread.changeTime(velocidadSlider.getValue());
+                   portadoraThread.changeTime(500 - velocidadSlider.getValue());
             }
         });
         framesSlider.addChangeListener(new ChangeListener() {
@@ -691,9 +691,11 @@ public class FirstForm extends javax.swing.JFrame
             }
         });
         
-        velocidadSlider.setMinimum(150);
-        velocidadSlider.setMaximum(1000);
+        velocidadSlider.setMinimum(0);
+        velocidadSlider.setMaximum(420);
         framesSlider.setMaximum(500);
         framesSlider.setMinimum(200);
+        velocidadSlider.setValue(350);
+        framesSlider.setValue(225);
     }
 }

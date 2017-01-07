@@ -94,6 +94,6 @@ public class ChartThread extends Thread
     
     public synchronized void changeTime(int time)
     {
-        this.frames = time;
+        this.time = time;
     }
 }
