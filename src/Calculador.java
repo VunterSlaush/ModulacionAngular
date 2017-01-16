@@ -1,3 +1,7 @@
+
+import org.apfloat.Apfloat;
+import org.apfloat.ApfloatMath;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -146,5 +150,30 @@ public class Calculador
     public Double redondear(double a) 
     {
         return Math.round(a * 100.0) / 100.0;
+    }
+
+    double sin(double value) {
+        Apfloat y = new Apfloat(value);
+        return ApfloatMath.sin(ApfloatMath.toRadians(y)).doubleValue();
+ 
+    }
+    
+     double cos(double value) {
+        Apfloat y = new Apfloat(value);
+        return ApfloatMath.cos(ApfloatMath.toRadians(y)).doubleValue();
+    }
+     
+    double frac(double value)
+    {
+        return ApfloatMath.frac(new Apfloat(value)).doubleValue();
+    }
+
+    double triangle(double x) 
+    {   
+        Apfloat y = new Apfloat(x);
+        y = y.multiply(new Apfloat(Math.PI));
+        y = ApfloatMath.sin(ApfloatMath.toRadians(y));
+        return ApfloatMath.asin(y).doubleValue();
+       
     }
 }

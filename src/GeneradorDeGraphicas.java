@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 import org.jfree.chart.ChartFactory;
@@ -55,6 +56,8 @@ public class GeneradorDeGraphicas
          true, // Use tooltips
          false // Configure chart to generate URLs?
        );
+        XYPlot plot = chart.getXYPlot();
+        plot.getRenderer().setSeriesPaint(0, new Color(3,169,244));
         return chart;
     }
 
@@ -63,6 +66,7 @@ public class GeneradorDeGraphicas
     	for (int i = 0;i<frames ; i++) 
         {   
             matrix[1][i]=e.evaluate(matrix[0][i]);
+            System.out.println("Evaluando:"+matrix[0][i]+" = "+matrix[1][i]);
     	}
     }
 
@@ -98,15 +102,45 @@ public class GeneradorDeGraphicas
     private IntervalXYDataset createBarDataSet(HashMap<Double, Double> spectro) {
         
         XYSeriesCollection collection = new XYSeriesCollection();
-        
+        String unit = evualuateSpectroUnit(spectro);
+        System.out.println("Unit"+unit);
+        Double value;
         for (Map.Entry<Double,Double> map : spectro.entrySet()) 
-        {
-             XYSeries jn = new XYSeries(map.getKey()+"Hz");
-                jn.add(Math.abs(map.getKey()), Math.abs(map.getValue()));
+        {   
+            value = map.getKey()/ConversorDeUnidades.getInstance().convertir(1, unit);
+             System.out.println("Value:"+value);
+             XYSeries jn = new XYSeries(value);
+             System.out.println("Key:"+map.getKey());
+             
+             jn.add(Math.abs(map.getKey()),Math.abs(map.getValue()));
              collection.addSeries(jn);
         }
-
-        return new XYBarDataset(collection,1);
+        if(unit.equals("MHz"))
+            return new XYBarDataset(collection,10);
+        else if(unit.equals("KHz"))
+            return new XYBarDataset(collection,10);
+        else
+             return new XYBarDataset(collection,1);
     }
+
+    private String evualuateSpectroUnit(HashMap<Double, Double> spectro) {
+     
+       double minValue = Double.MAX_VALUE;
+       for (Map.Entry<Double,Double> map : spectro.entrySet()) 
+       {
+           if(map.getKey() < minValue)
+                minValue = map.getKey();
+       }
+       
+       if(minValue > 1000000)
+           return "MHz";
+       else if(minValue>1000)
+           return "KHz";
+       else
+           return "Hz";
+
+    }
+
+
 
 }

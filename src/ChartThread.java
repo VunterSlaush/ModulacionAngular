@@ -15,12 +15,10 @@ import org.jfree.chart.ChartPanel;
  */
 public class ChartThread extends Thread 
 {   
-    private static final int CANT_MAXIMA_FRAMES = 225;
     IEvaluableEnTiempo evaluable;
     ChartPanel panel;
     boolean stop;
     int frameActual;
-    private static final long TIME_TO_RENDER = 150;
     private boolean pause;
     Integer frames;
     Integer time;

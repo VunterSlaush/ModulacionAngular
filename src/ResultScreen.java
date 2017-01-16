@@ -59,6 +59,8 @@ public class ResultScreen extends javax.swing.JFrame {
         pHSpinner = new javax.swing.JSpinner();
         timeUnidadSpinner = new javax.swing.JComboBox<String>();
         updateButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        calculosMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -107,6 +109,11 @@ public class ResultScreen extends javax.swing.JFrame {
         timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         updateButton.setText("Actualizar");
+
+        calculosMenu.setText("Calculos Relevantes");
+        jMenuBar1.add(calculosMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,9 +184,11 @@ public class ResultScreen extends javax.swing.JFrame {
     private ChartPanel demoduladaChart;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton besselButton;
+    private javax.swing.JMenu calculosMenu;
     private javax.swing.JPanel demoduladaPanel;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel moduladaPanel;
     private javax.swing.JButton okButton;

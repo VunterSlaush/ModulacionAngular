@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 import java.lang.Math.*;
+import org.apfloat.Apfloat;
+import org.apfloat.ApfloatMath;
+
 /**
  * Esta es la clase que tendra la evaluacion de las señales!
  * @author Jmota 
@@ -91,7 +94,7 @@ public class Signal implements IEvaluableEnTiempo
     public double evaluate(double t)
     {
         double value = t*w + fase;
-       // System.out.println(t+"*"+w+"+"+fase+"="+value);
+        System.out.println(t+"*"+w+"+"+fase+"="+value);
         if(tipo.equals(SAWTOOTH))
                 value = sawTooth(value);
         if(tipo.equals(SQUARE))
@@ -99,10 +102,9 @@ public class Signal implements IEvaluableEnTiempo
         if(tipo.equals(TRIANGULAR))
                 value = triangle(value);
         if(tipo.equals(SIN))
-                value = Math.sin(value);//TODO ver si quitar o no el 2 
+            value = Calculador.getInstance().sin(value);       
         if(tipo.equals(COS))
-                value = Math.cos(value); // TODO ver si quitar o no el 2 
-        //System.out.println("after function: "+value);
+                value = Calculador.getInstance().cos(value); 
         value*=amplitud;
         
         if(ruido)
@@ -117,9 +119,9 @@ public class Signal implements IEvaluableEnTiempo
     {   
         double value = (double) t*w + fase;
         if(tipo.equals(SIN))
-                value = Math.cos(value);
+                value = Calculador.getInstance().cos(value); 
         if(tipo.equals(COS))
-                value = Math.sin(value);
+                value = Calculador.getInstance().sin(value); 
         if(tipo.equals(TRIANGULAR))
                 value = triangleI(value);
         if(tipo.equals(SAWTOOTH))
@@ -136,7 +138,7 @@ public class Signal implements IEvaluableEnTiempo
        tn = ceil((n+Math.PI)/(2*Math.PI));
        return ((n - tn*2*Math.PI) + 2*Math.PI)/Math.PI;*/
        //System.out.println(fractPart(n));
-       return fractPart((double)n);
+       return Calculador.getInstance().frac(n);
    }
    
    public static double sawToothI(double n)
@@ -147,7 +149,7 @@ public class Signal implements IEvaluableEnTiempo
    private static double triangle(double x)
    {
        
-      return (Math.asin(Math.sin(Math.PI*x)));
+      return Calculador.getInstance().triangle(x);
       //return  1 - Math.abs( 1 - x % 2);
    }
    
@@ -168,14 +170,7 @@ public class Signal implements IEvaluableEnTiempo
            return 0;
    }
    
-   private static double fractPart(double n)
-   {
-     if (n > 0) {
-        return n - Math.floor(n);
-    } else {
-        return ((n - Math.ceil(n)) * -1);
-    }
-   }
+
 
    
 }
