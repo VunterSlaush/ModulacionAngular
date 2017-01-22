@@ -66,7 +66,7 @@ public class GeneradorDeGraphicas
     	for (int i = 0;i<frames ; i++) 
         {   
             matrix[1][i]=e.evaluate(matrix[0][i]);
-            System.out.println("Evaluando:"+matrix[0][i]+" = "+matrix[1][i]);
+            //System.out.println("Evaluando:"+matrix[0][i]+" = "+matrix[1][i]);
     	}
     }
 

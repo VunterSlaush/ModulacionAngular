@@ -1,4 +1,5 @@
 
+import javolution.lang.MathLib;
 import org.apfloat.Apfloat;
 import org.apfloat.ApfloatMath;
 
@@ -153,14 +154,12 @@ public class Calculador
     }
 
     double sin(double value) {
-        Apfloat y = new Apfloat(value);
-        return ApfloatMath.sin(ApfloatMath.toRadians(y)).doubleValue();
+        return MathLib.sin(value);
  
     }
     
      double cos(double value) {
-        Apfloat y = new Apfloat(value);
-        return ApfloatMath.cos(ApfloatMath.toRadians(y)).doubleValue();
+        return MathLib.cos(value);
     }
      
     double frac(double value)
@@ -170,10 +169,12 @@ public class Calculador
 
     double triangle(double x) 
     {   
-        Apfloat y = new Apfloat(x);
-        y = y.multiply(new Apfloat(Math.PI));
-        y = ApfloatMath.sin(ApfloatMath.toRadians(y));
-        return ApfloatMath.asin(y).doubleValue();
-       
+        return MathLib.asin(MathLib.sin(Math.PI*x)); 
+    }
+
+    String desviacionInstantaneaFreq(ModulateSignal modulada, double t) {
+        
+        double aF = modulada.m * modulada.moduladora.evaluarIntegrado(t);
+        return Double.toString(redondear(aF));
     }
 }

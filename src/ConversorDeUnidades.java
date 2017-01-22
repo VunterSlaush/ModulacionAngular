@@ -61,13 +61,22 @@ public class ConversorDeUnidades
     int retornarMultiploUnidad(String unidad) {
         if ("s".equals(unidad))
     		return 1;
-        if("ms".equals(unidad))
+        if("10^-2s".equals(unidad))
+                return 100;
+        if("ms".equals(unidad) || "10^-3s".equals(unidad))
                 return 1000;
         if("10^-4s".equals(unidad))
                 return 10000;
-        if("µs".equals(unidad))
+        if("10^-5s".equals(unidad))
                 return 100000;
-        
+        if("µs".equals(unidad) || "10^-6s".equals(unidad))
+                return 1000000;
+        if("10^-7s".equals(unidad))
+                return 10000000;
+        if("10^-8s".equals(unidad))
+                return 100000000;
+        if("10^-9s".equals(unidad))
+                return 1000000000;
         return 1000;
     }
 }

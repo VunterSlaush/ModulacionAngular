@@ -1,6 +1,13 @@
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,10 +24,12 @@ public class CalculosForm extends javax.swing.JFrame {
     /**
      * Creates new form CalculosForm
      */
-    public CalculosForm(Signal portadora, Signal moduladora) 
-    {
+    public CalculosForm(ModulateSignal modulada) 
+    {   
+        this.modulada = modulada;
+        
         initComponents();
-        initTextFields();
+        initSpinners();
     }
 
     /**
@@ -45,10 +54,10 @@ public class CalculosForm extends javax.swing.JFrame {
         devInsFreqLabel = new javax.swing.JLabel();
         faseInstLabel = new javax.swing.JLabel();
         freqInstLabel = new javax.swing.JLabel();
-        devInsFase = new javax.swing.JTextField();
-        devInstFreq = new javax.swing.JTextField();
-        faseInst = new javax.swing.JTextField();
-        freqInst = new javax.swing.JTextField();
+        devInstFaseSp = new javax.swing.JSpinner();
+        devInstFreqSp = new javax.swing.JSpinner();
+        faseInstSp = new javax.swing.JSpinner();
+        freqInstSp = new javax.swing.JSpinner();
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,12 +80,6 @@ public class CalculosForm extends javax.swing.JFrame {
 
         jLabel8.setText("=");
 
-        freqInst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                freqInstActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,12 +92,12 @@ public class CalculosForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(devInsFase)
-                            .addComponent(devInstFreq)
-                            .addComponent(faseInst)
-                            .addComponent(freqInst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(devInstFaseSp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(devInstFreqSp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(faseInstSp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(freqInstSp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,10 +126,11 @@ public class CalculosForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(devFaseInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(devInsFase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(devInstFaseSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
                 .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -140,11 +144,11 @@ public class CalculosForm extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
                                     .addComponent(devInsFreqLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(devInstFreq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(devInstFreqSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(faseInst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(faseInstSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(faseInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,7 +158,7 @@ public class CalculosForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(freqInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(freqInst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(freqInstSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -192,12 +196,8 @@ public class CalculosForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
-
-    private void freqInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_freqInstActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_freqInstActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,13 +206,13 @@ public class CalculosForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel devFaseInstLabel;
-    private javax.swing.JTextField devInsFase;
     private javax.swing.JLabel devInsFreqLabel;
-    private javax.swing.JTextField devInstFreq;
-    private javax.swing.JTextField faseInst;
+    private javax.swing.JSpinner devInstFaseSp;
+    private javax.swing.JSpinner devInstFreqSp;
     private javax.swing.JLabel faseInstLabel;
-    private javax.swing.JTextField freqInst;
+    private javax.swing.JSpinner faseInstSp;
     private javax.swing.JLabel freqInstLabel;
+    private javax.swing.JSpinner freqInstSp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -224,88 +224,31 @@ public class CalculosForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
-    private final KeyListener devFreqListener = new KeyListener() {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            evaluarValidez(e);
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    };
-    private final KeyListener devFaseListener = new KeyListener() {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            evaluarValidez(e);
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            String time = devInsFase.getText();
-            double t = Double.valueOf(time);
-            
-        }
-    };
-    private final KeyListener freqListener = new KeyListener() {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            evaluarValidez(e);
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    };
-    private final KeyListener faseListener = new KeyListener() {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            evaluarValidez(e);
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    };
+    private ModulateSignal modulada;
     
-    private void initTextFields() {
-       this.devInstFreq.addKeyListener(devFreqListener);
-       this.devInsFase.addKeyListener(devFaseListener);
-       this.faseInst.addKeyListener(freqListener);
-       this.freqInst.addKeyListener(faseListener);
-    }
+    
     
     private void evaluarValidez(KeyEvent e)
     {
           char caracter = e.getKeyChar();
           if(((caracter < '0') || (caracter > '9')) && (caracter != '\b'))
                e.consume();  
+    }
+
+    private void initSpinners() {
+        SpinnerNumberModel model = new SpinnerNumberModel(0.0,0.0 ,100000.0,0.001);
+        this.devInstFreqSp.setModel(model);
+        
+        devInstFreqSp.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+               String text = Calculador.getInstance().desviacionInstantaneaFreq(modulada, (double)devInstFreqSp.getValue());
+               devInsFreqLabel.setText(text);
+            }
+        });
+        
+       
+         
     }
 }

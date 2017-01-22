@@ -22,6 +22,7 @@ public class ChartThread extends Thread
     private boolean pause;
     Integer frames;
     Integer time;
+    private int unidad;
     public ChartThread(IEvaluableEnTiempo evaluable, ChartPanel panel)
     {
         this.evaluable = evaluable;
@@ -29,6 +30,7 @@ public class ChartThread extends Thread
         this.frames = 225;
         this.time = 150;
         frameActual = 0;
+        unidad = evaluarUnidad();
     }
     
     @Override
@@ -40,14 +42,13 @@ public class ChartThread extends Thread
        {
            try 
            {
-              
-              
+             
                if(!pause)
                {
                  panel.setChart(GeneradorDeGraphicas.getInstance().drawSignal(evaluable,
                        frameActual,
                        frameActual+frames, 
-                       ConversorDeUnidades.getInstance().retornarMultiploUnidad("µs")));
+                       unidad));
                
                  frameActual+=frames;
                }
@@ -79,6 +80,8 @@ public class ChartThread extends Thread
     public void changeEvaluable(IEvaluableEnTiempo e)
     {
         evaluable = e;
+        unidad = e.unidadOptima();
+        frameActual = 0;
     }
 
     boolean isPause() {
@@ -93,5 +96,10 @@ public class ChartThread extends Thread
     public synchronized void changeTime(int time)
     {
         this.time = time;
+    }
+
+    private int evaluarUnidad() 
+    {
+        return evaluable.unidadOptima();
     }
 }

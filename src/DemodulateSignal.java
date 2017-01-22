@@ -26,5 +26,11 @@ public class DemodulateSignal implements IEvaluableEnTiempo {
     public String getTipo() {
         return "Señal Demodulada";
     }
+
+    @Override
+    public int unidadOptima() {
+       return parent.unidadOptima();
+    }
+
     
 }

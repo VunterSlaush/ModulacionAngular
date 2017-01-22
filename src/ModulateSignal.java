@@ -17,10 +17,10 @@ public class ModulateSignal implements IEvaluableEnTiempo
     private static final int FM = 0;
     private static final int PM = 1;
     private final double k;// K es el Simbolo de Sensiblidad a La Desviacion/Modulacion !
-    private final Signal portadora;
-    private final Signal moduladora;
+    public final Signal portadora;
+    public final Signal moduladora;
     private final int modulationType;
-    private final double m; // Indice De Modulacion
+    public final double m; // Indice De Modulacion
     private final double B;// B es Ancho de banda CARSON
     private final double B2;// ancho de banda Bessele!
     private HashMap<Integer, Double> frecuenciasLaterales;
@@ -217,7 +217,11 @@ Sensibilidad de desviación*/
 
         return (portadora.frecuencia + cantidad_frecuencias*moduladora.frecuencia) - (portadora.frecuencia - cantidad_frecuencias*moduladora.frecuencia);
     }
-    
-    
-    
+
+    @Override
+    public int unidadOptima() {
+        return portadora.unidadOptima();
+    }
+
+
 }
