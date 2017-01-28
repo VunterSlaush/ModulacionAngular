@@ -31,8 +31,8 @@ public class ModulateSignal implements IEvaluableEnTiempo
         portadora = p;
         moduladora = mod;
         this.m = m;
-        this.k = generarSensibilidad();
         modulationType = type;
+        this.k = generarSensibilidad();
         B = generarAnchoDeBanda();
         ejecutarBessel();
         B2 = generarAnchoDeBandaBessel();
@@ -60,7 +60,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
     }
 
     private double evualarPM(double t) {
-       double moduladoraResultado = (double)m*moduladora.evaluate(t);
+       double moduladoraResultado = (double)k*moduladora.evaluate(t);
        double fase = portadora.fase;
        portadora.fase = moduladoraResultado;
        double value = portadora.evaluate(t);
@@ -153,7 +153,7 @@ Sensibilidad de desviación*/
     }
 
     private double generarSensibilidad() 
-    {
+    {   
         if(modulationType == FM)
             return (double)(m*Signal.pi2*moduladora.frecuencia)/moduladora.amplitud ;
         else
