@@ -172,9 +172,32 @@ public class Calculador
         return MathLib.asin(MathLib.sin(Math.PI*x)); 
     }
 
-    String desviacionInstantaneaFreq(ModulateSignal modulada, double t) {
+    double desviacionInstantaneaFreq(ModulateSignal modulada, double t) {
         
-        double aF = modulada.m * modulada.moduladora.evaluarIntegrado(t);
-        return Double.toString(redondear(aF));
+        double aF = (double)  modulada.moduladora.evaluarIntegrado(t);
+        return aF;
     }
+    
+    double desviacionInstantaneaFase(ModulateSignal modulada, double t) 
+    {    
+        double aF = (double) modulada.moduladora.evaluate(t);
+        return aF;
+    }
+    
+    
+    double faseInstantanea(ModulateSignal modulada, double t)
+    {
+        return modulada.portadora.w*t + modulada.moduladora.evaluate(t);
+    }
+    
+    double frecuenciaInstantanea(ModulateSignal modulada, double t)
+    {
+        return  modulada.portadora.frecuencia + modulada.moduladora.evaluarIntegrado(t)/(MathLib.PI * 2);
+    }
+    
+    double potenciaInstantanea(ModulateSignal m, double resis, double t)
+    {
+        return Math.pow(m.evaluate(t), 2)/resis;
+    }
+    
 }

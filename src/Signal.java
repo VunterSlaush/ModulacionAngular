@@ -118,6 +118,7 @@ public class Signal implements IEvaluableEnTiempo
     public double evaluarIntegrado(double t)
     {   
         double value = (double) t*w + fase;
+        System.out.println("Value in to function:"+value);
         if(tipo.equals(SIN))
                 value = -Calculador.getInstance().cos(value); 
         if(tipo.equals(COS))
@@ -129,6 +130,7 @@ public class Signal implements IEvaluableEnTiempo
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
+        System.out.println("Value Out:"+value);
         return value;
     }
     
