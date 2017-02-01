@@ -23,7 +23,7 @@ public class Signal implements IEvaluableEnTiempo
    
    
    public static final double pi2 = Math.PI * 2;
-   private static final double RUIDO_MAXIMO = 50.0;
+   private static final double RUIDO_MAXIMO = 1000.0;
    private static final int CIFRAS_SIGNIFICATIVAS = 1000000;//Cada 0 es 1 cifra
    double amplitud; 
    double frecuencia;
@@ -118,19 +118,19 @@ public class Signal implements IEvaluableEnTiempo
     public double evaluarIntegrado(double t)
     {   
         double value = (double) t*w + fase;
-        System.out.println("Value in to function:"+value);
+       
         if(tipo.equals(SIN))
                 value = -Calculador.getInstance().cos(value); 
         if(tipo.equals(COS))
                 value = Calculador.getInstance().sin(value); 
         if(tipo.equals(TRIANGULAR))
-                value = triangleI(value);
+                value = Calculador.getInstance().triangleIntegrate(t, w);
         if(tipo.equals(SAWTOOTH))
-                value = sawToothI(value);
+                value = Calculador.getInstance().sawToothIntegrate(t, w);
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
-        System.out.println("Value Out:"+value);
+        
         return value;
     }
     

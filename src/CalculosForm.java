@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
@@ -31,6 +32,8 @@ public class CalculosForm extends javax.swing.JFrame {
         
         initComponents();
         initSpinners();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
     }
 
     /**

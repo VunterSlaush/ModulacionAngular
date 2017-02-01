@@ -115,12 +115,8 @@ public class GeneradorDeGraphicas
              jn.add(Math.abs(map.getKey()),Math.abs(map.getValue()));
              collection.addSeries(jn);
         }
-        if(unit.equals("MHz"))
-            return new XYBarDataset(collection,10);
-        else if(unit.equals("KHz"))
-            return new XYBarDataset(collection,10);
-        else
-             return new XYBarDataset(collection,1);
+
+        return new XYBarDataset(collection,3);
     }
 
     private String evualuateSpectroUnit(HashMap<Double, Double> spectro) {

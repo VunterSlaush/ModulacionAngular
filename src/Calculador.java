@@ -169,7 +169,24 @@ public class Calculador
 
     double triangle(double x) 
     {   
-        return MathLib.asin(MathLib.sin(Math.PI*x)); 
+        return -2*MathLib.asin(MathLib.cos(Math.PI*x)) / Math.PI; 
+    }
+    
+    double triangleIntegrate(double x,double w)
+    {   
+        double a = 0.5*w*Math.pow(x, 2);
+        double b = MathLib.sqrt(Math.pow(MathLib.sin(x*w), 2))* (1/MathLib.sin(w*x));
+        double cos = MathLib.cos(w*x);
+        double sincos= x * (1/ MathLib.sin(cos));
+        return -2*((a*b+sincos)/MathLib.PI);
+    }
+    
+    double sawToothIntegrate(double x, double w)
+    {
+        double wx =w *x;
+        double cot = 1/ MathLib.tan(x*w);
+        double tan =2 * (1/MathLib.tan(cot));
+        return -(x*(wx+tan)/MathLib.PI);
     }
 
     double desviacionInstantaneaFreq(ModulateSignal modulada, double t) {

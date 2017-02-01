@@ -394,11 +394,22 @@ public class FirstForm extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void modularButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modularButtonActionPerformed
-        ModulateSignal modulada = armarModuladada();
-        System.out.println(modulada);
-        generarGraficaModuladoda(modulada);
-        ResultScreen result = new ResultScreen(modulada);
-        result.setVisible(true);
+        
+        if(validarCamposVacios())
+        {
+            ModulateSignal modulada = armarModuladada();
+            System.out.println(modulada);
+            if(Validador.getInstance().validarModulacion(modulada))
+            {
+                generarGraficaModuladoda(modulada);
+                ResultScreen result = new ResultScreen(modulada);
+                result.setVisible(true);
+            }
+            else
+                Validador.getInstance().mostrarErrorMsj(this,"Frecuencias no Validas!");
+        }
+
+ 
         
     }//GEN-LAST:event_modularButtonActionPerformed
 
@@ -624,7 +635,8 @@ public class FirstForm extends javax.swing.JFrame
     }
 
     private ModulateSignal armarModuladada() 
-    {
+    {   
+       
         double m = (double)this.desviacionSpinner.getValue();
         int type = tipoModulacionBox.getSelectedIndex();
         return new ModulateSignal(armarPortadora(),armarModuladora(),m,type);
@@ -697,5 +709,13 @@ public class FirstForm extends javax.swing.JFrame
         framesSlider.setMinimum(200);
         velocidadSlider.setValue(350);
         framesSlider.setValue(225);
+    }
+    
+    //TODO ver que hacer aqui? 
+    private boolean validarCamposVacios() {
+       //if(this.frecuenciaModuladoraSpinner)
+        
+        
+        return true;
     }
 }

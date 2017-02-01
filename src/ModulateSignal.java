@@ -24,7 +24,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
     private final double B;// B es Ancho de banda CARSON
     private final double B2;// ancho de banda Bessele!
     private HashMap<Integer, Double> frecuenciasLaterales;
-    private int cantidad_frecuencias;
+    public int cantidad_frecuencias;
     
     public ModulateSignal(Signal p, Signal mod, double m, int type)
     {   
@@ -73,9 +73,11 @@ public class ModulateSignal implements IEvaluableEnTiempo
         return new DemodulateSignal(this);
     }
     
+    /**TODO add filters to Demodulacion!
+    **/
     public double evaluateDemodulate(double t)
     {
-        return (double) evaluate(t)/moduladora.evaluate(t);
+        return (double) moduladora.evaluate(t);
     }
 
     @Override
@@ -103,6 +105,7 @@ Sensibilidad de desviación*/
                 + "Desviación de frecuencia (∆f): "+
                 Calculador.getInstance().redondear(k*moduladora.amplitud)+"\n"
                 +"Amplitudes de las Frecuencias Laterales:\n" +frecuenciasLateralesToString();
+        
 
         return retorno;
     }
@@ -207,6 +210,20 @@ Sensibilidad de desviación*/
          for (Map.Entry<Integer,Double> map : frecuenciasLaterales.entrySet()) 
         {
             string.append("J").append(map.getKey()).append(": ").append(map.getValue()).append("V \n");
+             
+        }
+        return string.toString();
+    }
+    
+    private String potenciasLateralesToString() 
+    {   
+        
+        StringBuilder string = new StringBuilder();
+        double value;
+        for (Map.Entry<Integer,Double> map : frecuenciasLaterales.entrySet()) 
+        {
+            value = map.getValue();
+            string.append("P").append(map.getKey()).append(": ").append(value).append("V \n");
              
         }
         return string.toString();
