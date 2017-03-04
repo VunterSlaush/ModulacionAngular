@@ -169,16 +169,21 @@ public class Calculador
 
     double triangle(double x) 
     {   
-        return Math.asin(Math.cos(x)); 
+        return -Math.asin(Math.cos(x)); 
     }
     
     double triangleIntegrate(double x,double w)
-    {   
-        double a = 0.5*w*Math.pow(x, 2);
-        double b = MathLib.sqrt(Math.pow(MathLib.sin(x*w), 2))* (1/MathLib.sin(w*x));
-        double cos = MathLib.cos(w*x);
-        double sincos= x * (1/ MathLib.sin(cos));
-        return -2*((a*b+sincos)/MathLib.PI);
+    {   /*
+        double sin = Math.sin(fm * 2 * Math.PI *  x);
+        double sqrt = Math.sqrt(Math.pow(sin, 2));
+        double csc = csc(fm*2*Math.PI*2 * x);
+        double asin = x * Math.asin(Math.cos(fm*2*Math.PI*x));
+        return -(fm*Math.PI*Math.pow(x, 2)*sqrt*csc + asin);*/
+        double sin = Math.sin(w*x);
+        double sqrt = Math.sqrt(Math.pow(sin,2));
+        double csc = csc(w*x);
+        double asin = x * Math.asin(Math.cos(w*x));
+        return -((w*Math.pow(x,2))/2 * sqrt * csc + asin);
     }
     
     double sawToothIntegrate(double x, double w)
@@ -226,4 +231,8 @@ public class Calculador
          return Math.cos(n)/Math.sin(n);
     }
     
+    double csc(double n)
+    {
+        return 1 / Math.sin(n);
+    }
 }

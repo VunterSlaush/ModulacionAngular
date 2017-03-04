@@ -155,13 +155,6 @@ public class Signal implements IEvaluableEnTiempo
       //return  1 - Math.abs( 1 - x % 2);
    }
    
-   private static double triangleI(double x)
-   {
-       if(x > 0.5)
-           return 3 - 4*x;
-       else
-           return 4*x - 1;
-   }
    
    private static double square(double x)
    {
