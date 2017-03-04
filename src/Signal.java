@@ -96,7 +96,7 @@ public class Signal implements IEvaluableEnTiempo
         double value = t*w + fase;
         
         if(tipo.equals(SAWTOOTH))
-                value = sawTooth(frecuencia * Math.PI * t);
+                value = sawTooth(frecuencia * Math.PI * t + fase);
         if(tipo.equals(SQUARE))
                 value = square(value);
         if(tipo.equals(TRIANGULAR))
