@@ -65,7 +65,7 @@ public class ResultScreen extends javax.swing.JFrame {
         calculosMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(0, 648));
 
         moduladaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Grafica Señal Modulada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -77,7 +77,7 @@ public class ResultScreen extends javax.swing.JFrame {
         );
         moduladaPanelLayout.setVerticalGroup(
             moduladaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
 
         demoduladaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Grafica Señal Demodulada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
@@ -90,7 +90,7 @@ public class ResultScreen extends javax.swing.JFrame {
         );
         demoduladaPanelLayout.setVerticalGroup(
             demoduladaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 127, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
 
         jScrollPane1.setBorder(null);
@@ -130,7 +130,7 @@ public class ResultScreen extends javax.swing.JFrame {
                             .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(besselButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(71, Short.MAX_VALUE))
+                            .addContainerGap(131, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(demoduladaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,7 +158,7 @@ public class ResultScreen extends javax.swing.JFrame {
                 .addComponent(moduladaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(demoduladaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -207,10 +207,10 @@ public class ResultScreen extends javax.swing.JFrame {
         gL.setRows(1);
 
         demoduladaPanel.setLayout(gL);
-        demoduladaPanel.setPreferredSize(new Dimension(60,150));
+        demoduladaPanel.setPreferredSize(new Dimension(150,200));
         demoduladaPanel.add(demoduladaChart);
         moduladaPanel.setLayout(gL);
-        moduladaPanel.setPreferredSize(new Dimension(60,150));
+        moduladaPanel.setPreferredSize(new Dimension(150,200));
         moduladaPanel.add(moduladaChart);
     }
 

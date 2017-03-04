@@ -96,7 +96,7 @@ public class Signal implements IEvaluableEnTiempo
         double value = t*w + fase;
         
         if(tipo.equals(SAWTOOTH))
-                value = sawTooth(value);
+                value = sawTooth(frecuencia * Math.PI * t);
         if(tipo.equals(SQUARE))
                 value = square(value);
         if(tipo.equals(TRIANGULAR))
@@ -130,7 +130,7 @@ public class Signal implements IEvaluableEnTiempo
         if(tipo.equals(TRIANGULAR))
                 value = Calculador.getInstance().triangleIntegrate(t, w);
         if(tipo.equals(SAWTOOTH))
-                value = Calculador.getInstance().sawToothIntegrate(t, w);
+                value = sawToothI(t,frecuencia*Math.PI);
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
@@ -139,18 +139,13 @@ public class Signal implements IEvaluableEnTiempo
     }
     
    public static double sawTooth(double n)
-   {   /*
-       double tn;
-       tn = ceil((n+Math.PI)/(2*Math.PI));
-       return ((n - tn*2*Math.PI) + 2*Math.PI)/Math.PI;*/
-       //System.out.println(fractPart(n));
-       
+   {
        return Calculador.getInstance().sawTooth(n);
    }
    
-   public static double sawToothI(double n)
+   public static double sawToothI(double t,double w)
    {
-       return n*(n-1);
+       return -((w*Math.pow(t, 2))/2 + t*Math.atan(Calculador.getInstance().cot(w*t)));
    }
    
    private static double triangle(double x)

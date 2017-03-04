@@ -222,7 +222,7 @@ public class Calculador
         return Math.atan(cot(n));
     }
 
-    private double cot(double n) {
+    double cot(double n) {
          return Math.cos(n)/Math.sin(n);
     }
     
