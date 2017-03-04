@@ -169,7 +169,7 @@ public class Calculador
 
     double triangle(double x) 
     {   
-        return -2*MathLib.asin(MathLib.cos(Math.PI*x)) / Math.PI; 
+        return Math.asin(Math.cos(x)); 
     }
     
     double triangleIntegrate(double x,double w)
@@ -215,6 +215,15 @@ public class Calculador
     double potenciaInstantanea(ModulateSignal m, double resis, double t)
     {
         return Math.pow(m.evaluate(t), 2)/resis;
+    }
+
+    double sawTooth(double n) 
+    {
+        return Math.atan(cot(n));
+    }
+
+    private double cot(double n) {
+         return Math.cos(n)/Math.sin(n);
     }
     
 }

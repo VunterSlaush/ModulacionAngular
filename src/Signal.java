@@ -105,7 +105,11 @@ public class Signal implements IEvaluableEnTiempo
             value = Calculador.getInstance().sin(value);       
         if(tipo.equals(COS))
                 value = Calculador.getInstance().cos(value); 
-        value*=amplitud;
+        
+        if(tipo.equals(SAWTOOTH) || tipo.equals(TRIANGULAR))
+            value*= -(2*amplitud/Math.PI); 
+        else
+            value*=amplitud;
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
@@ -140,7 +144,8 @@ public class Signal implements IEvaluableEnTiempo
        tn = ceil((n+Math.PI)/(2*Math.PI));
        return ((n - tn*2*Math.PI) + 2*Math.PI)/Math.PI;*/
        //System.out.println(fractPart(n));
-       return Calculador.getInstance().frac(n);
+       
+       return Calculador.getInstance().sawTooth(n);
    }
    
    public static double sawToothI(double n)

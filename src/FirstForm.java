@@ -51,7 +51,7 @@ public class FirstForm extends javax.swing.JFrame
         tipoModulacionBox = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         desviacionLabel = new javax.swing.JLabel();
-        desviacionSpinner = new javax.swing.JSpinner();
+        indiceSpinner = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         funcionPortadoraBox = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
@@ -82,6 +82,8 @@ public class FirstForm extends javax.swing.JFrame
         velocidadSlider = new javax.swing.JSlider();
         framesSlider = new javax.swing.JSlider();
         jLabel13 = new javax.swing.JLabel();
+        sensibilidadSpinner = new javax.swing.JSpinner();
+        desviacionLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(2147483647, 600));
@@ -107,7 +109,7 @@ public class FirstForm extends javax.swing.JFrame
 
         jLabel12.setText("Velocidad                            ");
 
-        desviacionLabel.setText("Indice de Modulacion {m}(Adimensional)");
+        desviacionLabel.setText("Indice de Modulacion");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Señal Portadora", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -286,7 +288,7 @@ public class FirstForm extends javax.swing.JFrame
         portadoraPanel.setLayout(portadoraPanelLayout);
         portadoraPanelLayout.setHorizontalGroup(
             portadoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGap(0, 293, Short.MAX_VALUE)
         );
         portadoraPanelLayout.setVerticalGroup(
             portadoraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,6 +323,8 @@ public class FirstForm extends javax.swing.JFrame
 
         jLabel13.setText("frames/seg");
 
+        desviacionLabel1.setText("Sensibilidad a la Desviacion");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -330,22 +334,25 @@ public class FirstForm extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(desviacionLabel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(modularButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(resetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tipoModulacionBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(desviacionSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(velocidadSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(framesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(indiceSpinner, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(velocidadSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(desviacionLabel))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(desviacionLabel1)
+                            .addComponent(framesSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sensibilidadSpinner))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(portadoraPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -371,9 +378,13 @@ public class FirstForm extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tipoModulacionBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(desviacionLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(desviacionLabel)
+                            .addComponent(desviacionLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(desviacionSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(indiceSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sensibilidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
@@ -482,13 +493,15 @@ public class FirstForm extends javax.swing.JFrame
 
     private void initSpinners()
     {
-        this.desviacionSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.indiceSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,30.0,0.1));
         this.faseModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.fasePortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.amplitudModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.amplitudPortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.frecuenciaPortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.frecuenciaModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.sensibilidadSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        
     }
 
     private Signal armarModuladora()
@@ -514,7 +527,7 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JSpinner amplitudPortadoraSpinner;
     private javax.swing.JComboBox<String> amplitudPortadoraUnidad;
     private javax.swing.JLabel desviacionLabel;
-    private javax.swing.JSpinner desviacionSpinner;
+    private javax.swing.JLabel desviacionLabel1;
     private javax.swing.JSpinner faseModuladoraSpinner;
     private javax.swing.JSpinner fasePortadoraSpinner;
     private javax.swing.JSlider framesSlider;
@@ -524,6 +537,7 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JComboBox<String> frecuenciaPortadoraUnidad;
     private javax.swing.JComboBox<String> funcionModuladoraBox;
     private javax.swing.JComboBox<String> funcionPortadoraBox;
+    private javax.swing.JSpinner indiceSpinner;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -544,6 +558,7 @@ public class FirstForm extends javax.swing.JFrame
     private javax.swing.JButton resetButton;
     private javax.swing.JCheckBox ruidoModuladoraCheck;
     private javax.swing.JCheckBox ruidoPortadoraCheck;
+    private javax.swing.JSpinner sensibilidadSpinner;
     private javax.swing.JComboBox tipoModulacionBox;
     private javax.swing.JSlider velocidadSlider;
     // End of variables declaration//GEN-END:variables
@@ -630,14 +645,14 @@ public class FirstForm extends javax.swing.JFrame
     private void resetModulada() 
     {
         moduladaChart.setChart(null);
-        this.desviacionSpinner.setValue(0.0);
+        this.indiceSpinner.setValue(0.0);
         this.tipoModulacionBox.setSelectedIndex(0);
     }
 
     private ModulateSignal armarModuladada() 
     {   
        
-        double m = (double)this.desviacionSpinner.getValue();
+        double m = (double)this.indiceSpinner.getValue();
         int type = tipoModulacionBox.getSelectedIndex();
         return new ModulateSignal(armarPortadora(),armarModuladora(),m,type);
     }
