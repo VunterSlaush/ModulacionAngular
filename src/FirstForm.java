@@ -1,11 +1,14 @@
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.BorderFactory;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.jfree.chart.ChartMouseEvent;
@@ -25,7 +28,8 @@ import org.jfree.chart.ChartPanel;
 public class FirstForm extends javax.swing.JFrame 
 {
 
-
+    private boolean indiceOrSensibility;
+    private Border defaultBorder;
     public FirstForm() {
         initComponents();
         initBoxes();
@@ -492,7 +496,8 @@ public class FirstForm extends javax.swing.JFrame
     }
 
     private void initSpinners()
-    {
+    {   
+        defaultBorder = this.indiceSpinner.getBorder();
         this.indiceSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,30.0,0.1));
         this.faseModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.fasePortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
@@ -501,6 +506,24 @@ public class FirstForm extends javax.swing.JFrame
         this.frecuenciaPortadoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.frecuenciaModuladoraSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
         this.sensibilidadSpinner.setModel(new SpinnerNumberModel(0.0,0.0 ,100000.0,0.1));
+        this.sensibilidadSpinner.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+               indiceOrSensibility = false;
+               indiceSpinner.setBorder(defaultBorder);
+               sensibilidadSpinner.setBorder(BorderFactory.createLineBorder(new Color(39,174,96)));
+            }
+        });
+        this.indiceSpinner.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                indiceOrSensibility = true;
+                sensibilidadSpinner.setBorder(defaultBorder);
+                indiceSpinner.setBorder(BorderFactory.createLineBorder(new Color(39,174,96)));
+            }
+        });
         
     }
 
@@ -653,8 +676,12 @@ public class FirstForm extends javax.swing.JFrame
     {   
        
         double m = (double)this.indiceSpinner.getValue();
+        double k = (double)this.sensibilidadSpinner.getValue();
         int type = tipoModulacionBox.getSelectedIndex();
-        return new ModulateSignal(armarPortadora(),armarModuladora(),m,type);
+        if(indiceOrSensibility)
+            return new ModulateSignal(armarPortadora(),armarModuladora(),m,type);
+        else
+            return new ModulateSignal(armarPortadora(),armarModuladora(),k,type,0);
     }
 
     private void generarGraficaModuladoda(ModulateSignal modulada) 
