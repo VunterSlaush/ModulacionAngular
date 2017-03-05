@@ -108,7 +108,7 @@
                           <Component id="velocidadSlider" min="-2" max="-2" attributes="0"/>
                           <Component id="framesSlider" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="modularButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="resetButton" alignment="3" min="-2" max="-2" attributes="0"/>

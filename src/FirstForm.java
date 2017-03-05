@@ -397,7 +397,7 @@ public class FirstForm extends javax.swing.JFrame
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(velocidadSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(framesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(modularButton)
                             .addComponent(resetButton)))
@@ -485,11 +485,11 @@ public class FirstForm extends javax.swing.JFrame
         gL.setColumns(1);
         gL.setRows(1);
         portadoraPanel.setLayout(gL);
-        portadoraPanel.setPreferredSize(new Dimension(60,60));
+        portadoraPanel.setPreferredSize(new Dimension(60,50));
         moduladoraPanel.setLayout(gL);
-        moduladoraPanel.setPreferredSize(new Dimension(60,60));
+        moduladoraPanel.setPreferredSize(new Dimension(60,50));
         moduladaPanel.setLayout(gL);
-        moduladaPanel.setPreferredSize(new Dimension(60,200));
+        moduladaPanel.setPreferredSize(new Dimension(60,140));
         portadoraPanel.add(portadoraChart);
         moduladoraPanel.add(moduladoraChart);
         moduladaPanel.add(moduladaChart);

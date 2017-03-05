@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
  
 
  
@@ -13,7 +15,16 @@ public class ChartTest
 { 
    public static void main (String[] args) throws IOException, Exception
    {
-     
+      try {
+          for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+              if ("Nimbus".equals(info.getName())) {
+                  UIManager.setLookAndFeel(info.getClassName());
+                  break;
+              }
+          }
+      } catch (Exception e) {
+          // If Nimbus is not available, you can set the GUI to another look and feel.
+      }
       FirstForm frame = new FirstForm();
       frame.setVisible(true);
       frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
