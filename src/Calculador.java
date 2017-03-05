@@ -183,7 +183,7 @@ public class Calculador
         double sqrt = Math.sqrt(Math.pow(sin,2));
         double csc = csc(w*x);
         double asin = x * Math.asin(Math.cos(w*x));
-        return -((w*Math.pow(x,2))/2 * sqrt * csc + asin);
+        return -(2/Math.PI)*((w*Math.pow(x,2))/2 * sqrt * csc + asin);
     }
     
     double sawToothIntegrate(double x, double w)
