@@ -67,7 +67,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
        double moduladoraResultado = (double) m * moduladora.evaluarIntegrado(t);
        double fase = portadora.fase;
        portadora.fase = moduladoraResultado;
-       double value = portadora.evaluate(t);
+       double value = portadora.evaluateSinRuido(t);
        portadora.fase = fase;
        return value;
     }
@@ -76,7 +76,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
        double moduladoraResultado = (double)k*moduladora.evaluate(t);
        double fase = portadora.fase;
        portadora.fase = moduladoraResultado;
-       double value = portadora.evaluate(t);
+       double value = portadora.evaluateSinRuido(t);
        portadora.fase = fase;
        return value;
     }
@@ -90,7 +90,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
     **/
     public double evaluateDemodulate(double t)
     {
-        return (double) moduladora.evaluate(t);
+        return (double) moduladora.evaluateSinRuido(t);
     }
 
     @Override

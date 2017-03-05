@@ -23,7 +23,7 @@ public class Signal implements IEvaluableEnTiempo
    
    
    public static final double pi2 = Math.PI * 2;
-   private static final double RUIDO_MAXIMO = 1000.0;
+   private static final double RUIDO_MAXIMO = 30.0;
    private static final int CIFRAS_SIGNIFICATIVAS = 1000000;//Cada 0 es 1 cifra
    double amplitud; 
    double frecuencia;
@@ -113,9 +113,7 @@ public class Signal implements IEvaluableEnTiempo
         
         if(ruido)
             value+= Math.random() % RUIDO_MAXIMO;
-        
-        //return Math.floor(value * CIFRAS_SIGNIFICATIVAS) / CIFRAS_SIGNIFICATIVAS;//Truncamos
-        
+
         return value;
     }
     
@@ -133,7 +131,7 @@ public class Signal implements IEvaluableEnTiempo
                 value = sawToothI(t,frecuencia*Math.PI);
         
         if(ruido)
-            value+= Math.random() % RUIDO_MAXIMO;
+            value+= Math.random() % (RUIDO_MAXIMO/amplitud);
         
         return value;
     }
@@ -185,6 +183,32 @@ public class Signal implements IEvaluableEnTiempo
         System.out.println("UNIDAD:"+unidad);
         return ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidad);
         
+    }
+    
+    public double evaluateSinRuido(double t)
+    {
+        double value = t*w + fase;
+        
+        if(tipo.equals(SAWTOOTH))
+                value = sawTooth(frecuencia * Math.PI * t + fase);
+        if(tipo.equals(SQUARE))
+                value = square(value);
+        if(tipo.equals(TRIANGULAR))
+                value = triangle(value);
+        if(tipo.equals(SIN))
+            value = Calculador.getInstance().sin(value);       
+        if(tipo.equals(COS))
+                value = Calculador.getInstance().cos(value); 
+        
+        if(tipo.equals(SAWTOOTH) || tipo.equals(TRIANGULAR))
+            value*= -(2*amplitud/Math.PI); 
+        else
+            value*=amplitud;
+        
+        if(ruido)
+            value+= Math.random() % (RUIDO_MAXIMO/amplitud);
+
+        return value;
     }
 
     

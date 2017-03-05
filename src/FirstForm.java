@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
@@ -423,8 +425,6 @@ public class FirstForm extends javax.swing.JFrame
             else
                 Validador.getInstance().mostrarErrorMsj(this,"Frecuencias no Validas!");
         }
-
- 
         
     }//GEN-LAST:event_modularButtonActionPerformed
 
@@ -525,6 +525,36 @@ public class FirstForm extends javax.swing.JFrame
             }
         });
         
+        this.indiceSpinner.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                  indiceOrSensibility = true;
+                sensibilidadSpinner.setBorder(defaultBorder);
+                indiceSpinner.setBorder(BorderFactory.createLineBorder(new Color(39,174,96)));
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        this.sensibilidadSpinner.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               indiceOrSensibility = false;
+               indiceSpinner.setBorder(defaultBorder);
+               sensibilidadSpinner.setBorder(BorderFactory.createLineBorder(new Color(39,174,96)));
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
 
     private Signal armarModuladora()
@@ -651,6 +681,11 @@ public class FirstForm extends javax.swing.JFrame
         amplitudPortadoraUnidad.setSelectedIndex(3);
         ruidoPortadoraCheck.setSelected(false);
         funcionPortadoraBox.setSelectedIndex(0);
+        if(portadoraThread != null)
+        {
+            portadoraThread.switchPause();
+        }
+
     }
 
     private void resetModuladora() 
@@ -663,6 +698,10 @@ public class FirstForm extends javax.swing.JFrame
         amplitudModuladoraUnidad.setSelectedIndex(3);
         ruidoModuladoraCheck.setSelected(false);
         funcionModuladoraBox.setSelectedIndex(0);
+        if(moduladoraThread != null)
+        {
+            moduladoraThread.switchPause();
+        }
     }
 
     private void resetModulada() 
@@ -670,6 +709,10 @@ public class FirstForm extends javax.swing.JFrame
         moduladaChart.setChart(null);
         this.indiceSpinner.setValue(0.0);
         this.tipoModulacionBox.setSelectedIndex(0);
+        if(moduladaThread != null)
+        {
+            moduladaThread.switchPause();
+        }
     }
 
     private ModulateSignal armarModuladada() 
@@ -754,10 +797,21 @@ public class FirstForm extends javax.swing.JFrame
     }
     
     //TODO ver que hacer aqui? 
-    private boolean validarCamposVacios() {
-       //if(this.frecuenciaModuladoraSpinner)
-        
-        
+    private boolean validarCamposVacios() 
+    {  
+       boolean indiceNoValido;
+       if(indiceOrSensibility) 
+        indiceNoValido = ((double)indiceSpinner.getValue()) <= 0;
+       else
+        indiceNoValido = ((double)sensibilidadSpinner.getValue()) <= 0; 
+       if(indiceNoValido)
+       {   
+           if(indiceOrSensibility)
+            Validador.getInstance().mostrarErrorMsj(this, "El Indice de Modulacion tiene que ser mayor a 0");
+           else
+            Validador.getInstance().mostrarErrorMsj(this, "La Sensibilidada a La desviacion tiene que ser Mayor a 0");
+           return false;
+       }
         return true;
     }
 }

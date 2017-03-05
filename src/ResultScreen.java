@@ -5,10 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import javax.swing.JFrame;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.util.Log;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +28,7 @@ import org.jfree.chart.JFreeChart;
 public class ResultScreen extends javax.swing.JFrame {
 
     private ModulateSignal modulate;
+    private Object PHSpinner;
     /**
      * Creates new form ResultScreen
      * @param modulate señal modulada! 
@@ -228,6 +234,53 @@ public class ResultScreen extends javax.swing.JFrame {
     private void initSpinners() {
         pDSpinner.setModel(new SpinnerNumberModel(0,0 ,10000,1));
         pHSpinner.setModel(new SpinnerNumberModel(500,0 ,10000,1));
+        pHSpinner.addMouseWheelListener(new MouseWheelListener() {
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                //To change body of generated methods, choose Tools | Templates.
+                if(e.getUnitsToScroll() < 0)
+                    pHSpinner.setValue(pHSpinner.getNextValue());
+                else
+                {
+                    if(pHSpinner.getPreviousValue() != null)
+                    pHSpinner.setValue(pHSpinner.getPreviousValue());
+                }
+                     
+            }
+        });
+        
+        pDSpinner.addMouseWheelListener(new MouseWheelListener() {
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 if(e.getUnitsToScroll() < 0)
+                    pDSpinner.setValue(pDSpinner.getNextValue());
+                 else if(pDSpinner.getPreviousValue()!= null)
+                 {
+                     pDSpinner.setValue(pDSpinner.getPreviousValue());
+                 }
+                     
+            }
+        });
+        pDSpinner.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                showGraphics();
+            }
+        });
+        
+        pHSpinner.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                showGraphics();
+            }
+        });
     }
 
     private void initButtons() {
@@ -287,12 +340,16 @@ public class ResultScreen extends javax.swing.JFrame {
     {
         int desde = (int)pDSpinner.getValue();
         int hasta = (int)pHSpinner.getValue();
-        String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
+        if(desde < hasta)
+        {
+                    String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
         JFreeChart modulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate,desde,hasta,
                 ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
         moduladaChart.setChart(modulada);
         JFreeChart demodulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate.demodulada(),desde,hasta,ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
         demoduladaChart.setChart(demodulada);
+        }
+
     }
 
     private void showResultString() {
