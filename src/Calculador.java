@@ -169,7 +169,7 @@ public class Calculador
 
     double triangle(double x) 
     {   
-        return -Math.asin(Math.cos(x)); 
+        return Math.asin(Math.cos(x)); 
     }
     
     double triangleIntegrate(double x,double w)
