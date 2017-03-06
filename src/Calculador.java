@@ -178,10 +178,7 @@ public class Calculador
     
     double sawToothIntegrate(double x, double w)
     {
-        double wx =w *x;
-        double cot = 1/ MathLib.tan(x*w);
-        double tan =2 * (1/MathLib.tan(cot));
-        return -(x*(wx+tan)/MathLib.PI);
+       return -((w*Math.pow(x, 2))/2 + x*Math.atan(Calculador.getInstance().cot(w*x)));
     }
 
     double desviacionInstantaneaFreq(ModulateSignal modulada, double t) {

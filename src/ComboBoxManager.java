@@ -58,7 +58,7 @@ public class ComboBoxManager
 
     public void initModulationTypeBox(JComboBox mBox)
     {
-    	String [] unidades = {"Modulacion de Frecuencia(FM)","Modulacion de Fase(PM)"};
+    	String [] unidades = {"Modulación de Frecuencia(FM)","Modulación de Fase(PM)"};
     	initBox(mBox,unidades); 
     }
 

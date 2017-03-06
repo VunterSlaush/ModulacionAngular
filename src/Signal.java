@@ -123,7 +123,7 @@ public class Signal implements IEvaluableEnTiempo
         if(tipo.equals(TRIANGULAR))
                 value = Calculador.getInstance().triangleIntegrate(t, w);
         if(tipo.equals(SAWTOOTH))
-                value = sawToothI(t,frecuencia*Math.PI);
+                value = Calculador.getInstance().sawToothIntegrate(t,frecuencia*Math.PI);
         
         if(ruido)
             value+= Math.random() % (RUIDO_MAXIMO/amplitud);
@@ -136,10 +136,7 @@ public class Signal implements IEvaluableEnTiempo
        return Calculador.getInstance().sawTooth(n);
    }
    
-   public static double sawToothI(double t,double w)
-   {
-       return -((w*Math.pow(t, 2))/2 + t*Math.atan(Calculador.getInstance().cot(w*t)));
-   }
+
    
    private static double triangle(double x)
    {
