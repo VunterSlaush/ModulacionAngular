@@ -61,6 +61,8 @@ public class ConversorDeUnidades
     int retornarMultiploUnidad(String unidad) {
         if ("s".equals(unidad))
     		return 1;
+        if("10^-1s".equals(unidad))
+                return 10;
         if("10^-2s".equals(unidad))
                 return 100;
         if("ms".equals(unidad) || "10^-3s".equals(unidad))

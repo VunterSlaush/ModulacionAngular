@@ -200,7 +200,8 @@ public class Calculador
     
     double frecuenciaInstantanea(ModulateSignal modulada, double t)
     {
-        return  modulada.portadora.frecuencia + modulada.moduladora.evaluarIntegrado(t)/(MathLib.PI * 2);
+        return  modulada.portadora.frecuencia + 
+                modulada.moduladora.evaluarIntegrado(t)/(MathLib.PI * 2);
     }
     
     double potenciaInstantanea(ModulateSignal m, double resis, double t)
