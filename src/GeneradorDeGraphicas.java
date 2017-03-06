@@ -57,7 +57,8 @@ public class GeneradorDeGraphicas
          false // Configure chart to generate URLs?
        );
         XYPlot plot = chart.getXYPlot();
-        plot.getRenderer().setSeriesPaint(0, new Color(3,169,244));
+        	
+        plot.getRenderer().setSeriesPaint(0, new Color(60,76,92));
         return chart;
     }
 

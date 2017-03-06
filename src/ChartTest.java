@@ -1,9 +1,12 @@
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.swing.ImageIcon;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -28,7 +31,9 @@ public class ChartTest
       FirstForm frame = new FirstForm();
       frame.setVisible(true);
       frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-       /*
+      frame.setIconImage(createImage().getImage());
+      frame.setTitle("Modulacion Angular");
+      /*
        double fc = ConversorDeUnidades.getInstance().convertir(1000, "Hz");
        double fm = ConversorDeUnidades.getInstance().convertir(100, "Hz");
        Signal m = new Signal(fm,1,0.0,false,Signal.SIN);
@@ -45,6 +50,10 @@ public class ChartTest
 //System.out.println(Signal.sawTooth(90));*/
 
    }
+
+    private static ImageIcon createImage() {
+        return new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/waves.png"));
+    }
    
 
    

@@ -1,7 +1,6 @@
 
 import javolution.lang.MathLib;
-import org.apfloat.Apfloat;
-import org.apfloat.ApfloatMath;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -161,11 +160,7 @@ public class Calculador
      double cos(double value) {
         return MathLib.cos(value);
     }
-     
-    double frac(double value)
-    {
-        return ApfloatMath.frac(new Apfloat(value)).doubleValue();
-    }
+
 
     double triangle(double x) 
     {   
@@ -173,12 +168,7 @@ public class Calculador
     }
     
     double triangleIntegrate(double x,double w)
-    {   /*
-        double sin = Math.sin(fm * 2 * Math.PI *  x);
-        double sqrt = Math.sqrt(Math.pow(sin, 2));
-        double csc = csc(fm*2*Math.PI*2 * x);
-        double asin = x * Math.asin(Math.cos(fm*2*Math.PI*x));
-        return -(fm*Math.PI*Math.pow(x, 2)*sqrt*csc + asin);*/
+    {  
         double sin = Math.sin(w*x);
         double sqrt = Math.sqrt(Math.pow(sin,2));
         double csc = csc(w*x);
@@ -205,7 +195,6 @@ public class Calculador
         double aF = (double) modulada.moduladora.evaluate(t);
         return aF;
     }
-    
     
     double faseInstantanea(ModulateSignal modulada, double t)
     {
