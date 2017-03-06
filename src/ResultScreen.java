@@ -35,13 +35,13 @@ public class ResultScreen extends javax.swing.JFrame {
      */
     public ResultScreen(ModulateSignal modulate) 
     {
+        this.modulate = modulate;
         initComponents();
         initBoxes();
         initSpinners();
         initCharts();
         initPanels();
         initButtons();
-        this.modulate = modulate;
         showGraphics();
         showResultString();
     }
@@ -222,7 +222,7 @@ public class ResultScreen extends javax.swing.JFrame {
 
     private void initBoxes() {
         ComboBoxManager.getInstance().initTimeBox(timeUnidadSpinner);
-        timeUnidadSpinner.setSelectedIndex(2);
+        timeUnidadSpinner.setSelectedIndex(getSelectedIndexByFreq());
         
     }
 
@@ -310,13 +310,14 @@ public class ResultScreen extends javax.swing.JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                CalculosForm c = new CalculosForm(modulate);
-                c.setVisible(true);
+                
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                CalculosForm c = new CalculosForm(modulate);
+                c.setVisible(true);
             }
 
             @Override
@@ -356,4 +357,17 @@ public class ResultScreen extends javax.swing.JFrame {
         resultTextArea.setEditable(false);
         resultTextArea.setText(modulate.toString());
     }
+
+    private int getSelectedIndexByFreq() 
+    {
+        String [] unidades = {"10^-1s","10^-2s","10^-3s","10^-4s","10^-5s","10^-6s","10^-7s","10^-8s","10^-9s"};
+        String u = this.modulate.portadora.getUnidadOptimaStr();
+        for(int i=0; i<unidades.length; i++)
+        {
+            if(u.equals(unidades[i]))
+                return i;
+        }
+        return 0;
+    }
+        
 }

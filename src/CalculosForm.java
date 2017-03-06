@@ -72,8 +72,8 @@ public class CalculosForm extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(410, 400));
-        setMinimumSize(new java.awt.Dimension(410, 400));
+        setMaximumSize(new java.awt.Dimension(410, 420));
+        setMinimumSize(new java.awt.Dimension(410, 420));
         setPreferredSize(new java.awt.Dimension(410, 400));
         setResizable(false);
 
@@ -204,7 +204,7 @@ public class CalculosForm extends javax.swing.JFrame {
                             .addComponent(potenciaSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)))
                     .addComponent(potenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         okButton.setText("OK");
@@ -223,7 +223,7 @@ public class CalculosForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+                .addGap(118, 118, 118)
                 .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -234,7 +234,7 @@ public class CalculosForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(okButton)
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
 
         pack();
@@ -359,7 +359,7 @@ public class CalculosForm extends javax.swing.JFrame {
                double result = Calculador.getInstance().potenciaInstantanea(modulada,
                            (double)resistenciaSp.getValue(), (double)potenciaSp.getValue());
                String text =  new DecimalFormat("#.######").format(result);
-               potenciaLabel.setText(text+ " watss");/** TODO poner unidad*/
+               potenciaLabel.setText(text+ " watts");/** TODO poner unidad*/
             }
         });       
         

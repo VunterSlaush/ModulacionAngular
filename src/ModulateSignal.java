@@ -99,19 +99,9 @@ public class ModulateSignal implements IEvaluableEnTiempo
         
         String retorno = "Resultados \n"
                 + "Sensibilidad a la Desviacion:" + k+" \n" 
-                //+ "portadora=" + portadora + ", moduladora=" + moduladora + ", "
-                //+ "modulationType=" + modulationType +
-     /*
-                Desviación de frecuencia.  
-Desviación de fase.  
-Desviación instantánea de fase.  
-Desviación Instantánea de frecuencia.   
-Frecuencia instantánea.  
-Fase instantánea.  
-Sensibilidad de desviación*/
-                +"Frecuencia Angular Portadora: "+portadora.w+" \n"
-                +"Frecuencia Angular Moduladora: "+moduladora.w+"\n"
-                +"Indice De Modulacion: " + m + "\n"
+                +"Frecuencia Angular Portadora: "+Calculador.getInstance().redondear(portadora.w)+" \n"
+                +"Frecuencia Angular Moduladora: "+Calculador.getInstance().redondear(moduladora.w)+"\n"
+                +"Indice De Modulacion: " + Calculador.getInstance().redondear(m) + "\n"
                 +"Ancho de banda calculado meditante Carson:" + B + " hz \n"
                 +"Ancho de banda calculado meditante Bessel:" + B2 + " hz \n"
                 +"Cantidad de Conjunto de Frecuencias Laterales Significativas: " + cantidad_frecuencias + '\n'
@@ -130,9 +120,9 @@ Sensibilidad de desviación*/
     @Override
     public String getTipo() {
         if(modulationType == FM)
-            return "Modulacion FM: "+portadora.getTipo()+" VS "+moduladora.getTipo();
+            return "Modulación  FM: "+portadora.getTipo()+" VS "+moduladora.getTipo();
         else
-            return "Modulacion PM: "+portadora.getTipo()+" VS "+moduladora.getTipo();
+            return "Modulación  PM: "+portadora.getTipo()+" VS "+moduladora.getTipo();
     }
 
 

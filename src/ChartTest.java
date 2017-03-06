@@ -32,7 +32,7 @@ public class ChartTest
       frame.setVisible(true);
       frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
       frame.setIconImage(createImage().getImage());
-      frame.setTitle("Modulacion Angular");
+      frame.setTitle("Modulación Angular");
       /*
        double fc = ConversorDeUnidades.getInstance().convertir(1000, "Hz");
        double fm = ConversorDeUnidades.getInstance().convertir(100, "Hz");

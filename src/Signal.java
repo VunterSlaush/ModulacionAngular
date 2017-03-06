@@ -157,12 +157,19 @@ public class Signal implements IEvaluableEnTiempo
 
     @Override
     public int unidadOptima() {
-        int n = 9;
+            
+        
+        return ConversorDeUnidades.getInstance().retornarMultiploUnidad(getUnidadOptimaStr());
+        
+    }
+    
+    public String getUnidadOptimaStr()
+    {
+                int n = 9;
         double div;
         for (int i = 9; i > 0; i--) 
         {
             div = (double)(frecuencia / Math.pow(10, i));
-            System.out.println("Div:"+div);
             if(Double.compare(0.1, div)<= 0)
             {
                 n = i;
@@ -171,10 +178,7 @@ public class Signal implements IEvaluableEnTiempo
         }
         if(n<9)
            n++;
-        String unidad = "10^-"+n+"s";
-        System.out.println("UNIDAD:"+unidad);
-        return ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidad);
-        
+        return "10^-"+n+"s";
     }
     
     public double evaluateSinRuido(double t)
