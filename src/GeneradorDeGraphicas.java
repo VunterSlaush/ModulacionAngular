@@ -105,6 +105,7 @@ public class GeneradorDeGraphicas
         XYSeriesCollection collection = new XYSeriesCollection();
         String unit = evualuateSpectroUnit(spectro);
         Double value = 1.0;
+        
         for (Map.Entry<Double,Double> map : spectro.entrySet()) 
         {   
             value = map.getKey()/ConversorDeUnidades.getInstance().convertir(1, unit);
@@ -138,6 +139,8 @@ public class GeneradorDeGraphicas
     private double getSpectroWidth(Double value) {
         
         int i = Double.toString(value).length();
+        if(Double.toString(value).contains("E"))
+            return 10.0;
         
         if(i>=9)
             return 10.0;
@@ -146,11 +149,10 @@ public class GeneradorDeGraphicas
         else if (i> 5)
             return 4.0;
         else if( i> 3)
-            return 2.0;
-        else if(i > 0)
             return 1.0;
         else 
             return 0.5;
+        
                    
     }
 

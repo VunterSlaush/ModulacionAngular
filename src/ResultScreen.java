@@ -232,8 +232,8 @@ public class ResultScreen extends javax.swing.JFrame {
     }
 
     private void initSpinners() {
-        pDSpinner.setModel(new SpinnerNumberModel(0,0 ,10000,1));
-        pHSpinner.setModel(new SpinnerNumberModel(500,0 ,10000,1));
+        pDSpinner.setModel(new SpinnerNumberModel(0,0 ,100000,1));
+        pHSpinner.setModel(new SpinnerNumberModel(500,0 ,100000,1));
         pHSpinner.addMouseWheelListener(new MouseWheelListener() {
 
             @Override
