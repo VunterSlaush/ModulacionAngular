@@ -86,7 +86,7 @@ public class GeneradorDeGraphicas
  
         IntervalXYDataset dataset = createBarDataSet(spectro);
      
-        return ChartFactory.createXYBarChart
+        JFreeChart chart =  ChartFactory.createXYBarChart
        (
          "Espectro de Frecuencias", // The chart title
          "Hz", // x axis label
@@ -98,6 +98,13 @@ public class GeneradorDeGraphicas
          false, // Use tooltips
          true // Configure chart to generate URLs?
        );
+        
+        XYPlot plot = chart.getXYPlot();
+        for(int i = 0; i<spectro.size(); i++)
+        {
+            plot.getRenderer().setSeriesPaint(i, new Color(60,76,92));   
+        }
+        return chart;
     }
 
     private IntervalXYDataset createBarDataSet(HashMap<Double, Double> spectro) {
@@ -105,7 +112,8 @@ public class GeneradorDeGraphicas
         XYSeriesCollection collection = new XYSeriesCollection();
         String unit = evualuateSpectroUnit(spectro);
         Double value = 1.0;
-        
+        double valForSpectroUnit1 = -1;
+        double spectroUnit2 = -2;
         for (Map.Entry<Double,Double> map : spectro.entrySet()) 
         {   
             value = map.getKey()/ConversorDeUnidades.getInstance().convertir(1, unit);
@@ -113,9 +121,19 @@ public class GeneradorDeGraphicas
              
              jn.add(Math.abs(map.getKey()),Math.abs(map.getValue()));
              collection.addSeries(jn);
+             if(spectroUnit2 == -1)
+             {
+                 spectroUnit2 = map.getKey();
+             }
+             
+             if(valForSpectroUnit1 == -1)
+             {
+                 valForSpectroUnit1 = map.getKey();
+                 spectroUnit2++;
+             }
         }
 
-        return new XYBarDataset(collection,getSpectroWidth(value));
+        return new XYBarDataset(collection,(spectroUnit2-valForSpectroUnit1)/4);
     }
 
     private String evualuateSpectroUnit(HashMap<Double, Double> spectro) {
@@ -139,13 +157,14 @@ public class GeneradorDeGraphicas
     private double getSpectroWidth(Double value) {
         
         int i = Double.toString(value).length();
+        System.out.println("I:"+i+" value:"+Double.toString(value) + " number:"+value);
         if(Double.toString(value).contains("E"))
-            return 10.0;
+            return 10000.0;
         
         if(i>=9)
-            return 10.0;
+            return 80.0;
         else if(i> 7)
-            return 5.0;
+            return 1000.0;
         else if (i> 5)
             return 4.0;
         else if( i> 3)
