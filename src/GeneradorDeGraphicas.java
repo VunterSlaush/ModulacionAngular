@@ -104,20 +104,17 @@ public class GeneradorDeGraphicas
         
         XYSeriesCollection collection = new XYSeriesCollection();
         String unit = evualuateSpectroUnit(spectro);
-        System.out.println("Unit"+unit);
-        Double value;
+        Double value = 1.0;
         for (Map.Entry<Double,Double> map : spectro.entrySet()) 
         {   
             value = map.getKey()/ConversorDeUnidades.getInstance().convertir(1, unit);
-             System.out.println("Value:"+value);
              XYSeries jn = new XYSeries(value);
-             System.out.println("Key:"+map.getKey());
              
              jn.add(Math.abs(map.getKey()),Math.abs(map.getValue()));
              collection.addSeries(jn);
         }
 
-        return new XYBarDataset(collection,3);
+        return new XYBarDataset(collection,getSpectroWidth(value));
     }
 
     private String evualuateSpectroUnit(HashMap<Double, Double> spectro) {
@@ -136,6 +133,25 @@ public class GeneradorDeGraphicas
        else
            return "Hz";
 
+    }
+
+    private double getSpectroWidth(Double value) {
+        
+        int i = Double.toString(value).length();
+        
+        if(i>=9)
+            return 10.0;
+        else if(i> 7)
+            return 5.0;
+        else if (i> 5)
+            return 4.0;
+        else if( i> 3)
+            return 2.0;
+        else if(i > 0)
+            return 1.0;
+        else 
+            return 0.5;
+                   
     }
 
 
