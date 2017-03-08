@@ -94,6 +94,7 @@ public class FirstForm extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(2147483647, 600));
         setMinimumSize(new java.awt.Dimension(700, 700));
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jLabel2.setText("Tipo de Modulacion");
 

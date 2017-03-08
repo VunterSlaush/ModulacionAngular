@@ -96,17 +96,21 @@ public class ModulateSignal implements IEvaluableEnTiempo
     @Override
     public String toString() 
     {   
-        
+        String mUnidad;
+        if(this.modulationType == FM)
+            mUnidad = " (adimensional)";
+        else
+            mUnidad = " Rad";
         String retorno = "Resultados \n"
-                + "Sensibilidad a la Desviacion:" + k+" \n" 
+                + "Sensibilidad a la Desviacion:" + k+" hz/v \n" 
                 +"Frecuencia Angular Portadora: "+Calculador.getInstance().redondear(portadora.w)+" \n"
                 +"Frecuencia Angular Moduladora: "+Calculador.getInstance().redondear(moduladora.w)+"\n"
-                +"Indice De Modulacion: " + Calculador.getInstance().redondear(m) + "\n"
+                +"Indice De Modulacion: " + Calculador.getInstance().redondear(m) +mUnidad +" \n"
                 +"Ancho de banda calculado meditante Carson:" + B + " hz \n"
                 +"Ancho de banda calculado meditante Bessel:" + B2 + " hz \n"
                 +"Cantidad de Conjunto de Frecuencias Laterales Significativas: " + cantidad_frecuencias + '\n'
                 + "Desviación de frecuencia (∆f): "+
-                Calculador.getInstance().redondear(k*moduladora.amplitud)+"\n"
+                Calculador.getInstance().redondear(k*moduladora.amplitud)+" hz \n"
                 +"Amplitudes de las Frecuencias Laterales:\n" +frecuenciasLateralesToString();
         
 

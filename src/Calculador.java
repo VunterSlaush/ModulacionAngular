@@ -1,5 +1,10 @@
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import javolution.lang.MathLib;
+import org.jfree.data.xy.XYSeries;
 
 
 /*
@@ -206,7 +211,7 @@ public class Calculador
     
     double potenciaInstantanea(ModulateSignal m, double resis, double t)
     {
-        return Math.pow(m.evaluate(t), 2)/resis;
+        return redondear(Math.pow(m.evaluate(t), 2)/resis);
     }
 
     double sawTooth(double n) 
@@ -221,5 +226,27 @@ public class Calculador
     double csc(double n)
     {
         return 1 / Math.sin(n);
+    }
+
+    double potenciaPromedio(ModulateSignal modulada, double resis) 
+    {
+        return redondear(Math.pow(modulada.portadora.amplitud,2)/resis);
+    }
+
+    double potenciaTotal(ModulateSignal modulada, double d) {
+        HashMap<Double, Double> spectro = modulada.getSpectro();
+        Set<Double> amplitudes = new HashSet<>();
+        double pt = potenciaPromedio(modulada,d);
+        for (Map.Entry<Double,Double> map : spectro.entrySet()) 
+        {   
+            System.out.println("Map.key:"+map.getKey());
+            System.out.println("Map.Value:"+map.getValue());
+            amplitudes.add(map.getValue());
+        }
+        for(Double v : amplitudes)
+        {
+            pt+= Math.pow(v, 2)/d;
+        }
+        return redondear(pt);
     }
 }

@@ -128,7 +128,7 @@ public class GeneradorDeGraphicas
              }
         }
 
-        return new XYBarDataset(collection,(spectroUnit2-valForSpectroUnit1)/spectro.size());
+        return new XYBarDataset(collection,(spectroUnit2-valForSpectroUnit1)/spectro.size()+0.5);
     }
 
     private String evualuateSpectroUnit(HashMap<Double, Double> spectro) {
