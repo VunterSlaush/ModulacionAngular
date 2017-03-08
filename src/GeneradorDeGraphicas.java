@@ -128,7 +128,7 @@ public class GeneradorDeGraphicas
              }
         }
 
-        return new XYBarDataset(collection,(spectroUnit2-valForSpectroUnit1)/4);
+        return new XYBarDataset(collection,(spectroUnit2-valForSpectroUnit1)/spectro.size());
     }
 
     private String evualuateSpectroUnit(HashMap<Double, Double> spectro) {
@@ -148,28 +148,5 @@ public class GeneradorDeGraphicas
            return "Hz";
 
     }
-
-    private double getSpectroWidth(Double value) {
-        
-        int i = Double.toString(value).length();
-        System.out.println("I:"+i+" value:"+Double.toString(value) + " number:"+value);
-        if(Double.toString(value).contains("E"))
-            return 10000.0;
-        
-        if(i>=9)
-            return 80.0;
-        else if(i> 7)
-            return 1000.0;
-        else if (i> 5)
-            return 4.0;
-        else if( i> 3)
-            return 1.0;
-        else 
-            return 0.5;
-        
-                   
-    }
-
-
 
 }

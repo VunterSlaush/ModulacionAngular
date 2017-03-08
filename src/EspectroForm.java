@@ -59,11 +59,11 @@ public class EspectroForm extends javax.swing.JFrame {
         spectroPanel.setLayout(spectroPanelLayout);
         spectroPanelLayout.setHorizontalGroup(
             spectroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
         spectroPanelLayout.setVerticalGroup(
             spectroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
 
         okButton.setText("OK");
@@ -117,7 +117,7 @@ public class EspectroForm extends javax.swing.JFrame {
         gL.setRows(1);
 
         spectroPanel.setLayout(gL);
-        spectroPanel.setPreferredSize(new Dimension(150,250));
+        spectroPanel.setPreferredSize(new Dimension(240,350));
         spectroPanel.add(spectroChart);
     }
 
