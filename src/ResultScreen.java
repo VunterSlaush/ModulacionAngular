@@ -75,6 +75,8 @@ public class ResultScreen extends javax.swing.JFrame {
         showGraphics();
         showGraphics2();
         showResultString();
+        setIconImage(ChartTest.createImage().getImage());
+        setTitle("Modulación Angular: Resultado");
     }
 
     /**

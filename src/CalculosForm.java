@@ -33,6 +33,8 @@ public class CalculosForm extends javax.swing.JFrame {
         initComponents();
         initSpinners();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setIconImage(ChartTest.createImage().getImage());
+        setTitle("Modulación Angular: Calculos Relevantes");
         
     }
 

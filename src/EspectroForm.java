@@ -25,6 +25,8 @@ public class EspectroForm extends javax.swing.JFrame {
      */
     public EspectroForm(HashMap<Double,Double> espectro) {
         initComponents();
+        setIconImage(ChartTest.createImage().getImage());
+        setTitle("Modulación Angular: Espectro de Frecuencia");
         initChart(espectro);
         initPanel();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

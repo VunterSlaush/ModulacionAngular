@@ -51,7 +51,7 @@ public class ChartTest
 
    }
 
-    private static ImageIcon createImage() {
+    public static ImageIcon createImage() {
         return new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/waves.png"));
     }
    
