@@ -32,12 +32,8 @@ public class GeneradorDeGraphicas
     	return instance;
     }	
 
-    public JFreeChart drawSignal(IEvaluableEnTiempo e)
-    {
-        return drawSignal(e,0,1000,10000);
-    }
     
-    public JFreeChart drawSignal(IEvaluableEnTiempo  s, int from, int to,int unidad)
+    public JFreeChart drawSignal(IEvaluableEnTiempo  s, int from, int to,double unidad)
     {
     	int frames = to - from;
     	double [][] matrix = new double[AXIS][frames];     
@@ -67,11 +63,10 @@ public class GeneradorDeGraphicas
     	for (int i = 0;i<frames ; i++) 
         {   
             matrix[1][i]=e.evaluate(matrix[0][i]);
-            //System.out.println("Evaluando:"+matrix[0][i]+" = "+matrix[1][i]);
     	}
     }
 
-    private void fillMatrix(double[][] matrix, int to, int from, int unidad) 
+    private void fillMatrix(double[][] matrix, int to, int from, double unidad) 
     {
         int frames = to - from;
         

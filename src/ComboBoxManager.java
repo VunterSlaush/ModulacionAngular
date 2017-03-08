@@ -22,7 +22,6 @@ public class ComboBoxManager
     {
     	if (instance == null) 
     		instance = new ComboBoxManager();
-    	
     	return instance;
     }
 
@@ -45,8 +44,7 @@ public class ComboBoxManager
 
     public void initTimeBox(JComboBox fBox)
     {
-    	String [] unidades = {"10^-1s","10^-2s","10^-3s","10^-4s","10^-5s","10^-6s","10^-7s","10^-8s","10^-9s"};
-    	initBox(fBox,unidades); 
+    	initBox(fBox,ConversorDeUnidades.unidades); 
     }
 
 

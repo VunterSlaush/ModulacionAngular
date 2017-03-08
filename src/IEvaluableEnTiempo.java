@@ -12,5 +12,5 @@ public interface IEvaluableEnTiempo
 {
     public double evaluate(double t);
     public String getTipo();
-    public int unidadOptima();
+    public double unidadOptima();
 }

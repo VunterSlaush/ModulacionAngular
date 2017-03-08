@@ -28,7 +28,7 @@ public class DemodulateSignal implements IEvaluableEnTiempo {
     }
 
     @Override
-    public int unidadOptima() {
+    public double unidadOptima() {
        return parent.unidadOptima();
     }
 

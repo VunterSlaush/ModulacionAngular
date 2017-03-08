@@ -89,7 +89,6 @@ public class Signal implements IEvaluableEnTiempo
     public double evaluate(double t)
     {
         double value = t*w + fase;
-        
         if(tipo.equals(SAWTOOTH))
                 value = sawTooth(frecuencia * Math.PI * t + fase);
         if(tipo.equals(SQUARE))
@@ -115,7 +114,7 @@ public class Signal implements IEvaluableEnTiempo
     public double evaluarIntegrado(double t)
     {   
         double value = (double) t*w + fase;
-       
+
         if(tipo.equals(SIN))
                 value = -Calculador.getInstance().cos(value); 
         if(tipo.equals(COS))
@@ -156,7 +155,7 @@ public class Signal implements IEvaluableEnTiempo
    }
 
     @Override
-    public int unidadOptima() {
+    public double unidadOptima() {
             
         
         return ConversorDeUnidades.getInstance().retornarMultiploUnidad(getUnidadOptimaStr());
@@ -165,17 +164,23 @@ public class Signal implements IEvaluableEnTiempo
     
     public String getUnidadOptimaStr()
     {
-                int n = 9;
+        int n = 9;
         double div;
-        for (int i = 9; i > 0; i--) 
+        for (int i = 12; i > 0; i--) 
         {
             div = (double)(frecuencia / Math.pow(10, i));
-            if(Double.compare(0.1, div)<= 0)
+            if(Double.compare(0.1, div)<= 0 && frecuencia < Math.pow(10, 9))
             {
                 n = i;
                 break;
-            }    
+            }
+            else if(Double.compare(0.01, div)<= 0 && frecuencia > Math.pow(10, 8))
+            {
+                n= i;
+                break;
+            }
         }
+        System.out.println("N:"+n);
         if(n<9)
            n++;
         return "10^-"+n+"s";

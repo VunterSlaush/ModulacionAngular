@@ -247,7 +247,7 @@ public class ModulateSignal implements IEvaluableEnTiempo
     }
 
     @Override
-    public int unidadOptima() {
+    public double unidadOptima() {
         return portadora.unidadOptima();
     }
 

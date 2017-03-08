@@ -28,7 +28,37 @@ import org.jfree.util.Log;
 public class ResultScreen extends javax.swing.JFrame {
 
     private ModulateSignal modulate;
-    private Object PHSpinner;
+    private MouseWheelListener moduladoraMouseWheel = new MouseWheelListener() {
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                //To change body of generated methods, choose Tools | Templates.
+                if(e.getUnitsToScroll() < 0)
+                    dHSpinner.setValue(dHSpinner.getNextValue());
+                else
+                {
+                    if(dHSpinner.getPreviousValue() != null)
+                    dHSpinner.setValue(dHSpinner.getPreviousValue());
+                }
+                     
+            }
+        };
+    private ChangeListener changeDemoduladora = new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                showGraphics2();
+            }
+        };
+    private ChangeListener changeModuladora = new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                showGraphics();
+            }
+        };
     /**
      * Creates new form ResultScreen
      * @param modulate señal modulada! 
@@ -43,6 +73,7 @@ public class ResultScreen extends javax.swing.JFrame {
         initPanels();
         initButtons();
         showGraphics();
+        showGraphics2();
         showResultString();
     }
 
@@ -62,11 +93,19 @@ public class ResultScreen extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
         besselButton = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        pDSpinner = new javax.swing.JSpinner();
+        dDSpinner = new javax.swing.JSpinner();
         jLabel14 = new javax.swing.JLabel();
-        pHSpinner = new javax.swing.JSpinner();
-        timeUnidadSpinner = new javax.swing.JComboBox<String>();
+        dHSpinner = new javax.swing.JSpinner();
+        dTiimeUnidadSpinner = new javax.swing.JComboBox<String>();
         updateButton = new javax.swing.JButton();
+        updateButton1 = new javax.swing.JButton();
+        mTimeUnidadSpinner = new javax.swing.JComboBox<String>();
+        pHSpinner1 = new javax.swing.JSpinner();
+        jLabel15 = new javax.swing.JLabel();
+        pDSpinner1 = new javax.swing.JSpinner();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         calculosMenu = new javax.swing.JMenu();
 
@@ -83,7 +122,7 @@ public class ResultScreen extends javax.swing.JFrame {
         );
         moduladaPanelLayout.setVerticalGroup(
             moduladaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addGap(0, 146, Short.MAX_VALUE)
         );
 
         demoduladaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Grafica Señal Demodulada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
@@ -96,7 +135,7 @@ public class ResultScreen extends javax.swing.JFrame {
         );
         demoduladaPanelLayout.setVerticalGroup(
             demoduladaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addGap(0, 146, Short.MAX_VALUE)
         );
 
         jScrollPane1.setBorder(null);
@@ -114,9 +153,21 @@ public class ResultScreen extends javax.swing.JFrame {
 
         jLabel14.setText("Hasta:");
 
-        timeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        dTiimeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         updateButton.setText("Actualizar");
+
+        updateButton1.setText("Actualizar");
+
+        mTimeUnidadSpinner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel15.setText("Hasta:");
+
+        jLabel16.setText("De:");
+
+        jLabel1.setText("Control Señal Modulada");
+
+        jLabel2.setText("Control Señal Demodulada");
 
         calculosMenu.setText("Calculos Relevantes");
         jMenuBar1.add(calculosMenu);
@@ -130,31 +181,48 @@ public class ResultScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(113, 113, 113)
-                            .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(besselButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(131, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(demoduladaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(moduladaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1))
-                            .addContainerGap()))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(besselButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(demoduladaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(moduladaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(4, 4, 4)
-                        .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel14)
-                        .addGap(4, 4, 4)
-                        .addComponent(pHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13)
+                                .addGap(4, 4, 4)
+                                .addComponent(dDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel14)
+                                .addGap(4, 4, 4)
+                                .addComponent(dHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dTiimeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(updateButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel16)
+                                .addGap(4, 4, 4)
+                                .addComponent(pDSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel15)
+                                .addGap(4, 4, 4)
+                                .addComponent(pHSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mTimeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(updateButton1)))
                         .addGap(91, 91, 91))))
         );
         layout.setVerticalGroup(
@@ -164,17 +232,33 @@ public class ResultScreen extends javax.swing.JFrame {
                 .addComponent(moduladaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(demoduladaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pDSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pHSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mTimeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updateButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel15))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(pHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(timeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dTiimeUnidadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(updateButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel2))
                             .addComponent(jLabel14))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,7 +266,7 @@ public class ResultScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(okButton)
                     .addComponent(besselButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,18 +277,26 @@ public class ResultScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton besselButton;
     private javax.swing.JMenu calculosMenu;
+    private javax.swing.JSpinner dDSpinner;
+    private javax.swing.JSpinner dHSpinner;
+    private javax.swing.JComboBox<String> dTiimeUnidadSpinner;
     private javax.swing.JPanel demoduladaPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> mTimeUnidadSpinner;
     private javax.swing.JPanel moduladaPanel;
     private javax.swing.JButton okButton;
-    private javax.swing.JSpinner pDSpinner;
-    private javax.swing.JSpinner pHSpinner;
+    private javax.swing.JSpinner pDSpinner1;
+    private javax.swing.JSpinner pHSpinner1;
     private javax.swing.JTextArea resultTextArea;
-    private javax.swing.JComboBox<String> timeUnidadSpinner;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton updateButton1;
     // End of variables declaration//GEN-END:variables
 
     private void initPanels() {
@@ -221,9 +313,10 @@ public class ResultScreen extends javax.swing.JFrame {
     }
 
     private void initBoxes() {
-        ComboBoxManager.getInstance().initTimeBox(timeUnidadSpinner);
-        timeUnidadSpinner.setSelectedIndex(getSelectedIndexByFreq());
-        
+        ComboBoxManager.getInstance().initTimeBox(dTiimeUnidadSpinner);
+        ComboBoxManager.getInstance().initTimeBox(this.mTimeUnidadSpinner);
+        dTiimeUnidadSpinner.setSelectedIndex(getSelectedIndexByFreq());
+        mTimeUnidadSpinner.setSelectedIndex(getSelectedIndexByFreq());
     }
 
     private void initCharts() {
@@ -232,60 +325,23 @@ public class ResultScreen extends javax.swing.JFrame {
     }
 
     private void initSpinners() {
-        pDSpinner.setModel(new SpinnerNumberModel(0,0 ,100000,1));
-        pHSpinner.setModel(new SpinnerNumberModel(500,0 ,100000,1));
-        pHSpinner.addMouseWheelListener(new MouseWheelListener() {
-
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                //To change body of generated methods, choose Tools | Templates.
-                if(e.getUnitsToScroll() < 0)
-                    pHSpinner.setValue(pHSpinner.getNextValue());
-                else
-                {
-                    if(pHSpinner.getPreviousValue() != null)
-                    pHSpinner.setValue(pHSpinner.getPreviousValue());
-                }
-                     
-            }
-        });
-        
-        pDSpinner.addMouseWheelListener(new MouseWheelListener() {
-
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                 if(e.getUnitsToScroll() < 0)
-                    pDSpinner.setValue(pDSpinner.getNextValue());
-                 else if(pDSpinner.getPreviousValue()!= null)
-                 {
-                     pDSpinner.setValue(pDSpinner.getPreviousValue());
-                 }
-                     
-            }
-        });
-        pDSpinner.addChangeListener(new ChangeListener() {
-
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                showGraphics();
-            }
-        });
-        
-        pHSpinner.addChangeListener(new ChangeListener() {
-
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                showGraphics();
-            }
-        });
+        dDSpinner.setModel(new SpinnerNumberModel(0,0 ,100000,1));
+        dHSpinner.setModel(new SpinnerNumberModel(500,0 ,100000,1));
+        pDSpinner1.setModel(new SpinnerNumberModel(0,0 ,100000,1));
+        pHSpinner1.setModel(new SpinnerNumberModel(500,0 ,100000,1));
+        dDSpinner.addChangeListener(changeDemoduladora);
+        dHSpinner.addChangeListener(changeDemoduladora);
+        pDSpinner1.addChangeListener(changeModuladora);
+        pHSpinner1.addChangeListener(changeModuladora);
     }
 
     private void initButtons() {
-        updateButton.addActionListener((ActionEvent e) -> {
+        updateButton1.addActionListener((ActionEvent e) -> {
             showGraphics();
+        });
+        
+        updateButton.addActionListener((ActionEvent e) -> {
+            showGraphics2();
         });
         
         besselButton.addActionListener(new ActionListener() {
@@ -339,18 +395,27 @@ public class ResultScreen extends javax.swing.JFrame {
 
     private void showGraphics() 
     {
-        int desde = (int)pDSpinner.getValue();
-        int hasta = (int)pHSpinner.getValue();
-        if(desde < hasta)
+        int desdeM = (int)pDSpinner1.getValue();
+        int hastaM = (int)pHSpinner1.getValue();
+        if(desdeM < hastaM)
         {
-                    String unidadTiempo = (String)this.timeUnidadSpinner.getSelectedItem();
-        JFreeChart modulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate,desde,hasta,
+                    String unidadTiempo = (String)this.mTimeUnidadSpinner.getSelectedItem();
+        JFreeChart modulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate,desdeM,hastaM,
                 ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
         moduladaChart.setChart(modulada);
-        JFreeChart demodulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate.demodulada(),desde,hasta,ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
-        demoduladaChart.setChart(demodulada);
         }
-
+    }
+    
+    private void showGraphics2()
+    {
+        int desdeD = (int)dDSpinner.getValue();
+        int hastaD = (int)dHSpinner.getValue();
+        if(desdeD < hastaD)
+        {   
+            String unidadTiempo = (String)this.dTiimeUnidadSpinner.getSelectedItem();
+            JFreeChart demodulada = GeneradorDeGraphicas.getInstance().drawSignal(modulate.demodulada(),desdeD,hastaD,ConversorDeUnidades.getInstance().retornarMultiploUnidad(unidadTiempo));
+            demoduladaChart.setChart(demodulada);
+        }
     }
 
     private void showResultString() {
@@ -360,7 +425,7 @@ public class ResultScreen extends javax.swing.JFrame {
 
     private int getSelectedIndexByFreq() 
     {
-        String [] unidades = {"10^-1s","10^-2s","10^-3s","10^-4s","10^-5s","10^-6s","10^-7s","10^-8s","10^-9s"};
+        String [] unidades = ConversorDeUnidades.unidades;
         String u = this.modulate.portadora.getUnidadOptimaStr();
         for(int i=0; i<unidades.length; i++)
         {

@@ -164,7 +164,7 @@ public class Calculador
 
     double triangle(double x) 
     {   
-        return Math.asin(Math.cos(x)); 
+        return MathLib.asin(MathLib.cos(x)); 
     }
     
     double triangleIntegrate(double x,double w)

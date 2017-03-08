@@ -6,6 +6,10 @@
 public class ConversorDeUnidades 
 {
 	private static ConversorDeUnidades instance;
+    static String[] unidades = {"10^-1s","10^-2s","10^-3s",
+                              "10^-4s","10^-5s","10^-6s",
+                              "10^-7s","10^-8s","10^-9s",
+                              "10^-10s","10^-11s","10^-12s"};
 	private ConversorDeUnidades(){}
 
 	//Unidades Estandares SI??
@@ -46,19 +50,7 @@ public class ConversorDeUnidades
 		return valor; 
     }
 
-    public double convertirTiempo(int valor, String unidad)
-    {   
-    	if ("s".equals(unidad))
-    		return valor * S;
-    	if("min".equals(unidad))
-    		return valor * MIN;
-        if("µs".equals(unidad))
-                return valor * micro;
-    	
-    	return valor;
-    }
-
-    int retornarMultiploUnidad(String unidad) {
+    double retornarMultiploUnidad(String unidad) {
         if ("s".equals(unidad))
     		return 1;
         if("10^-1s".equals(unidad))
@@ -79,6 +71,12 @@ public class ConversorDeUnidades
                 return 100000000;
         if("10^-9s".equals(unidad))
                 return 1000000000;
+        if("10^-10s".equals(unidad))
+                return Math.pow(10, 10);
+        if("10^-11s".equals(unidad))
+                return Math.pow(10, 11);
+        if("10^-12s".equals(unidad))
+                return Math.pow(10, 12);
         return 1000;
     }
 }
